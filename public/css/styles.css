@@ -2,7 +2,7 @@
 
 body {
   margin: 0;
-  background: #fafafa;
+  background: #3a37c8;
 }
 
 body, h1, h2, p, a, input {
@@ -22,7 +22,7 @@ header {
   width: 100%;
   padding: 20px;
   text-align: right;
-  background: white;
+
   box-sizing: border-box;
   box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.1);
 }
@@ -35,7 +35,7 @@ header a {
 }
 
 header a:hover {
-  background: #ffe100;
+  background: #514fb8;
   color: black;
 }
 
@@ -44,35 +44,6 @@ header a:hover {
 .content {
   max-width: 800px;
   margin: 40px auto 0;
-}
-
-/* request list styles */
-
-.request-list li {
-  padding: 20px;
-  margin: 10px auto;
-  list-style-type: none;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
-  display: flex;
-  justify-content: space-between;
-}
-
-.request-list .votes {
-  position: relative;
-  top: -5px;
-  z-index: 0;
-}
-
-.request-list .upvote {
-  cursor: pointer;
-  border-radius: 50%;
-}
-
-.request-list .upvote:active {
-  color: black;
-  background: #ffe100;
 }
 
 /* modal styles */
@@ -126,10 +97,12 @@ header a:hover {
 /* form element styles */
 
 input {
+
   margin: 0px 0;
-  padding: 8px 2px;
   border-width: 0 0 2px 0;
-  text-align: right;
+  text-align: left;
+  width: 100%;
+  padding: 12px 20px;
 }
 
 .form1 {
@@ -238,3 +211,7 @@ nav {
 
 }
 
+a{
+  text-decoration:none;
+  color:#444444;
+}
