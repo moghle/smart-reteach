@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Interactive Video</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- jQuery -->
+	<script src="js/jquery-1.12.3.min.js"></script>
+
+	<!-- Skeleton CSS & Featherlight -->
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/skeleton.css">
+	<link rel="stylesheet" href="css/featherlight.css">
+	<script src="js/featherlight.js"></script>
+
+	<!-- Interaction CSS -->
+	<link rel="stylesheet" href="css/interaction.css">
+
+	<!-- Interaction js -->
+	<script src="js/interaction.js"></script>
+
+	<!-- GreenSock -->
+	<script src="js/TweenMax.min.js"></script>
+
+</head>
+<body>
+
+	<div class="container">
+		
+		<div class="row videoArea">
+			<div class="box1"></div>
+			<div class="box2"></div>
+			<video id="video1" controls autoplay="true">
+				<source src="media/office_conv.m4v" type="video/mp4">
+				Your browser does not support the video tag.
+			</video>
+		</div>
+
+		<div class="row descArea">
+			
+			<h5>Video Title</h5>
+			<p>This is the description</p>
+			<div class="current">0:00</div>
+			<div class="duration">0:00</div>
+
+		</div>
+
+	</div> <!-- End of Container -->
+
+	<div class="lightbox popUpQuestion1">
+		<h4>Question 1</h4>
+		<p>Think about what you learned and then how would you respond?</p>
+		<br>
+		<a href="#" class="button longBtns goodChoice">Calmly respond with helpful info</a>
+		<a href="#" class="button longBtns badChoice">Why is he asking me this question?</a>
+	</div>
+
+	<div class="lightbox persona1PopUp">
+		<img src="images/Justin.jpg">
+		<h5>Justins Hanks</h5>
+		<p>Role: Development Manager</p>
+		<p>Bio: Justin has been a manager for 4 years. sakjdhsakjdh askjdh ksajhd aksjh askjdhksajd askjhd askjhdkjsah </p>
+		<p>Previous Experiences</p>
+		<ul>
+			<li>Experience 1: 2002-2004</li>
+			<li>Experience 2: 2005-2009</li>
+			<li>Experience 3: 2010-2016</li>
+		</ul>
+	</div>
+
+	<div class="lightbox persona2PopUp">
+		<img src="images/Matt.jpg">
+		<h5>Matt Briscoe</h5>
+		<p>Role: Developer</p>
+		<p>Bio: Matt has been a manager for 4 years. This alkjdlas asldkjasldj aslkdj aklsdjlsakdjalskjd salkdj salkjd</p>
+		<p>Previous Experiences</p>
+		<ul>
+			<li>Experience 1: 2002-2004</li>
+			<li>Experience 2: 2005-2009</li>
+			<li>Experience 3: 2010-2016</li>
+		</ul>
+	</div>
+
+</body>
+</html>
+

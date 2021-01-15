@@ -57,6 +57,7 @@ firebase.auth().onAuthStateChanged(user => {
   if (user) {
     authWrapper.classList.remove('open');
     authModals.forEach(modal => modal.classList.remove('active'));
+    window.open("player.html")
   } else {
     authWrapper.classList.add('open');
     authModals[0].classList.add('active');
