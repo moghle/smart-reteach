@@ -50,6 +50,7 @@ header a:hover {
 
 .modal {
   width: 400px;
+  height: 570px;
   padding: 30px;
   margin: 100px auto;
   border-radius: 10px;
@@ -117,7 +118,7 @@ input {
 button {
   margin-top: 10px;
   padding: 8px 12px;
-  background: #ffe100;
+  background: #139187;
   border: 0;
   font-weight: bold;
   font-family: inherit;

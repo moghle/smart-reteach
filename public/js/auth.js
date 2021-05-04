@@ -3,7 +3,7 @@ const authModals = document.querySelectorAll('.auth .modal');
 const authWrapper = document.querySelector('.auth');
 const registerForm = document.querySelector('.register');
 const loginForm = document.querySelector('.login');
-const signOut = document.querySelector('.sign-out');
+// const signOut = document.querySelector('.sign-out');
 
 // toggle auth modals
 authSwitchLinks.forEach(link => {
@@ -46,18 +46,19 @@ loginForm.addEventListener('submit', (e) => {
     });
 });
 
-// sign out
-signOut.addEventListener('click', () => {
-  firebase.auth().signOut()
-    .then(() => console.log('signed out'));
-});
+// // sign out
+// signOut.addEventListener('click', () => {
+//   firebase.auth().signOut()
+//     .then(() => console.log('signed out'));
+// });
 
 // auth listener
 firebase.auth().onAuthStateChanged(user => {
   if (user) {
     authWrapper.classList.remove('open');
     authModals.forEach(modal => modal.classList.remove('active'));
-    window.open("player.html")
+    //window.open("player.html")
+    window.location.replace("dashboard.html")
   } else {
     authWrapper.classList.add('open');
     authModals[0].classList.add('active');

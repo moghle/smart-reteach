@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <!-- links -->
+  <link rel="stylesheet" href="css/videoPlayer.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+    integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  <link href="https://vjs.zencdn.net/7.11.4/video-js.css" rel="stylesheet" /> <!-- video player-->
+
+
+  <title>Videoplayer</title>
+
+  <header class="header">
+
+    <a href="#">
+      <img src="dashboard/logo.png" alt="ReTeach Logo" class="ReTeach-logo" />
+    </a>
+    <form class="search-bar">
+      <input class="search-input" type="search" placeholder="Search" aria-label="Search" />
+      <button type="submit" class="search-btn">
+        <img src="dashboard/magnify.svg" />
+      </button>
+    </form>
+    <div class="menu-icons">
+      <!-- <a href="#">
+            <img src="dashboard/video-plus.svg" alt="Upload Video" />
+          </a> -->
+      <!-- <a href="#">
+            <img src="dashboard/apps.svg" alt="Apps" />
+          </a> -->
+      <a href="dashboard.html">
+        <img class="menu-channel-icon" src="dashboard/dash_logo.png" alt="Notifications" />
+      </a>
+      <a href="#">
+        <img class="menu-channel-icon sign-out"
+          src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
+          alt="Your Channel" />
+      </a>
+    </div>
+  </header>
+
+<body>
+  <h1 class="title">Physics letures:</h1>
+  <div class="context">
+  </div>
+
+
+  <div class="area">
+    <ul class="circles">
+
+
+      <!-- video player -->
+      <div class="container-player">
+
+        <div id="mediaPlayer">
+          <video
+          id="my-video"
+          class="video-js"
+          controls
+          preload="auto"
+          width="100%"
+          height="100%"
+          poster="MY_VIDEO_POSTER.jpg"
+          data-setup="{}"
+        >
+          <source src="https://firebasestorage.googleapis.com/v0/b/reteach-a06a6.appspot.com/o/courses%2Flecture%201%20sample.mp4?alt=media&token=8f45fbd6-0420-4d0f-acda-64bed2d90ee8" type="video/mp4" />
+          <p class="vjs-no-js">
+            To view this video please enable JavaScript, and consider upgrading to a
+            web browser that
+            <a href="https://videojs.com/html5-video-support/" target="_blank"
+              >supports HTML5 video</a
+            >
+          </p>
+        </video>
+        </div>
+
+<!--   ---------------------------------------------------    -->
+        <div id="playlist">
+          <div class=video>
+            <div id=imageContainer> imageContainer
+              <idv id=videoInformation> video info
+                <p>
+                  title
+                  <span>
+                    durarion
+                  </span>
+                </p>
+
+              </idv>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ul>
+  </div>
+
+
+  <!-- update the version number as needed -->
+  <script src="/__/firebase/7.19.1/firebase-app.js"></script>
+  <!-- include only the Firebase features as you need -->
+  <script src="/__/firebase/7.19.1/firebase-auth.js"></script>
+  <script src="/__/firebase/7.19.1/firebase-firestore.js"></script>
+  <script src="/__/firebase/7.19.1/firebase-database.js"></script>
+
+  <script src="https://player.vimeo.com/api/player.js"></script>
+
+  <!-- initialize the SDK after all desired features are loaded -->
+  <script src="/__/firebase/init.js"></script>
+  <script src="js/signout.js"></script>
+
+</body>
+
+</html>
