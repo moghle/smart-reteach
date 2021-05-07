@@ -7,43 +7,49 @@ const loginForm = document.querySelector('.login');
 
 // toggle auth modals
 authSwitchLinks.forEach(link => {
-  link.addEventListener('click', () => {
-    authModals.forEach(modal => modal.classList.toggle('active'));
-  });
+    link.addEventListener('click', () => {
+        authModals.forEach(modal => modal.classList.toggle('active'));
+    });
 });
 
 // register form
 registerForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  
-  const email = registerForm.email.value;
-  const password = registerForm.password.value;
+    e.preventDefault();
 
-  firebase.auth().createUserWithEmailAndPassword(email, password)
-    .then(user => {
-      console.log('registered', user);
-      registerForm.reset();
-    })
-    .catch(error => {
-      registerForm.querySelector('.error').textContent = error.message;
-    });
+    const email = registerForm.email.value;
+    const password = registerForm.password.value;
+
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then(cred => {
+            return firebase.firestore().collection("Users").doc(cred.user.uid).set({
+                email: 'email'
+            });
+
+        }).then(() => {
+            registerForm.reset();
+            login();
+        })
+        .catch(error => {
+            registerForm.querySelector('.error').textContent = error.message;
+        });
 });
 
 // login form
 loginForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  
-  const email = loginForm.email.value;
-  const password = loginForm.password.value;
+    e.preventDefault();
 
-  firebase.auth().signInWithEmailAndPassword(email, password)
-    .then(user => {
-      console.log('logged in', user);
-      loginForm.reset();
-    })
-    .catch(error => {
-      loginForm.querySelector('.error').textContent = error.message;
-    });
+    const email = loginForm.email.value;
+    const password = loginForm.password.value;
+
+    firebase.auth().signInWithEmailAndPassword(email, password)
+        .then(user => {
+            console.log('logged in', user);
+            loginForm.reset();
+            login();
+        })
+        .catch(error => {
+            loginForm.querySelector('.error').textContent = error.message;
+        });
 });
 
 // // sign out
@@ -53,14 +59,16 @@ loginForm.addEventListener('submit', (e) => {
 // });
 
 // auth listener
-firebase.auth().onAuthStateChanged(user => {
-  if (user) {
-    authWrapper.classList.remove('open');
-    authModals.forEach(modal => modal.classList.remove('active'));
-    //window.open("player.html")
-    window.location.replace("dashboard.html")
-  } else {
-    authWrapper.classList.add('open');
-    authModals[0].classList.add('active');
-  }
-});
+function login() {
+    firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+            authWrapper.classList.remove('open');
+            authModals.forEach(modal => modal.classList.remove('active'));
+            //window.open("player.html")
+            window.location.replace("dashboard.html")
+        } else {
+            authWrapper.classList.add('open');
+            authModals[0].classList.add('active');
+        }
+    });
+}
