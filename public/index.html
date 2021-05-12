@@ -2,74 +2,78 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ReTeach</title>
-  <!-- stylesheets -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ReTeach</title>
+    <!-- stylesheets -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
 <body>
 
-  <!-- auth modals -->
-      <!-- auth modals -->
-      <div class="auth open">
+    <!-- auth modals -->
+    <!-- auth modals -->
+    <div class="auth open">
         <div class="modal active">
-          <img src="dashboard/logo.png" alt="ReTeach Logo" class="ReTeach-logo" />
-          <h2>Login</h2>
-          <br>
-          <form class="login">
-            <input type="text" name="email" placeholder="Email" checked="checked">
-            <input type="password" name="password" placeholder="Password" checked=checked>
-            <br><br>
-            <button>Login</button>
-            <p class="error"></p>
-          </form>
-          <div>No account? <a class="switch">Register Here</a></div>
+            <img src="dashboard/logo.png" alt="ReTeach Logo" class="ReTeach-logo" />
+            <h2>Login</h2>
+            <br>
+            <form class="login">
+                <input type="text" name="email" placeholder="Email" checked="checked">
+                <input type="password" name="password" placeholder="Password" checked=checked>
+                <div id="teacherLogin">
+                    <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+                    <label for="vehicle1"> I`m a teacher</label><br>
+                </div>
+                <br><br>
+                <button>Login</button>
+                <p class="error"></p>
+            </form>
+            <div>No account? <a class="switch">Register Here</a></div>
         </div>
         <div class="modal">
-          <img src="dashboard/logo.png" alt="ReTeach Logo" class="ReTeach-logo" />
-          <h2>Register</h2>
-          <br>
-          <form class="register">
-            <input type="text" name="email" placeholder="Email">
-            <input type="password" name="password" placeholder="Password">
-            <input type="password" name="confirm-password" placeholder="Confirm Password">
-            <br><br>
-            <button>Register</button>
-            <p class="error"></p>
-          </form>
-          <div>Got an account? <a class="switch">Login</a></div>
+            <img src="dashboard/logo.png" alt="ReTeach Logo" class="ReTeach-logo" />
+            <h2>Register</h2>
+            <br>
+            <form class="register">
+                <input type="text" name="email" placeholder="Email">
+                <input type="password" name="password" placeholder="Password">
+                <input type="password" name="confirm-password" placeholder="Confirm Password">
+                <br><br>
+                <button>Register</button>
+                <p class="error"></p>
+            </form>
+            <div>Got an account? <a class="switch">Login</a></div>
         </div>
-      </div>
+    </div>
 
-  <!-- <header>
+    <!-- <header>
     <nav>
       <a class="sign-out">Sign Out</a>
     </nav>
   </header> -->
-  
-  <!-- vue js -->
-  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 
-  <!-- update the version number as needed -->
-  <script src="/__/firebase/7.19.1/firebase-app.js"></script>
-  <!-- include only the Firebase features as you need -->
-  <script src="/__/firebase/7.19.1/firebase-auth.js"></script>
-  <script src="/__/firebase/7.19.1/firebase-firestore.js"></script>
-  <script src="/__/firebase/7.19.1/firebase-database.js"></script>
+    <!-- vue js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 
-  <!-- initialize the SDK after all desired features are loaded -->
-  <script src="/__/firebase/init.js"></script>
+    <!-- update the version number as needed -->
+    <script src="/__/firebase/7.19.1/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script src="/__/firebase/7.19.1/firebase-auth.js"></script>
+    <script src="/__/firebase/7.19.1/firebase-firestore.js"></script>
+    <script src="/__/firebase/7.19.1/firebase-database.js"></script>
+
+    <!-- initialize the SDK after all desired features are loaded -->
+    <script src="/__/firebase/init.js"></script>
 
 
 
-  <script src="js/auth.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
 
 </body>
 
