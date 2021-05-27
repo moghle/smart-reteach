@@ -48,7 +48,7 @@
 
 <body>
   <div id="playerApp">
-    <h1 class="title">Physics letures:</h1>
+    <h1 class="title">Physics lectures:</h1>
     <div class="context">
     </div>
 
@@ -63,9 +63,9 @@
           <div id="mediaPlayer">
             <video id="my-video" class="video-js" controls preload="auto" width="100%" height="100%"
               poster="MY_VIDEO_POSTER.jpg" data-setup="{}">
-              <!-- <source
-              src="https://firebasestorage.googleapis.com/v0/b/reteach-a06a6.appspot.com/o/courses%2FJavaScript%20Promises%20In%2010%20Minutes_2.mp4?alt=media&token=80355321-4b2a-4e97-830b-c843bf7955d4"
-              type="video/mp4" /> -->
+              <source
+                src="https://firebasestorage.googleapis.com/v0/b/reteach-a06a6.appspot.com/o/courses%2Flecture%201.mp4?alt=media&token=50245d96-a621-4650-9471-ba75c3ae5969"
+                type="video/mp4" />
               <p class="vjs-no-js">
                 To view this video please enable JavaScript, and consider upgrading to a
                 web browser that
@@ -75,9 +75,9 @@
           </div>
 
           <!--   ---------------------------------------------------    -->
-          <div >
-            <ul class=video v-for="lecture in lectures">
-              <idv id=videoInformation class="video-information" > {{lecture.videoPath}}
+          <div class="playlist">
+            <div class=video v-for="lecture in lectures">
+              <idv id=videoInformation class="video-information"> {{lecture.videoPath}}
                 <div class="w3-light-grey w3-round">
                   <div class="w3-container w3-round w3-blue" style="width:44%">44%</div>
                 </div>
@@ -85,23 +85,24 @@
                   duration
                 </div>
               </idv>
-            </ul>
+              </udiv>
+            </div>
           </div>
-        </div>
-        <button>Add bookmark</button>
-        <table>
-          <tr>
+          
+      </ul>
+      <button>Add bookmark</button>
+          <table>
+            <tr>
               <th>Title</th>
               <th>Date</th>
               <th>view</th>
-          </tr>
-          <tr v-for="course in courses">
+            </tr>
+            <tr v-for="course in courses">
               <td>{{course.filePath}}</td>
               <td>{{course.year}}</td>
               <td><button>Play</button></td>
-          </tr>
-      </table>
-      </ul>
+            </tr>
+          </table>
     </div>
 
   </div>

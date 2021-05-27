@@ -14,17 +14,17 @@ var app = new Vue({
         ref.onSnapshot(snapshot => {
             let courses = [];
             snapshot.forEach(doc => {
-                courses.push({...doc.data(), id: doc.id });
+                courses.push({ ...doc.data(), id: doc.id });
             });
 
             this.courses = courses;
         });
     },
     methods: {
-        getid: function() {
+        getid: function () {
             this.userid = localStorage.getItem("buttonId");
         },
-        addLecturefn: function(event) {
+        addLecturefn: function (event) {
             this.open = true;
 
             // close "add lectures" modal
@@ -40,7 +40,7 @@ var app = new Vue({
 
             var self = this;
             /* Upload Functionality*/
-            fileButton.addEventListener('change', function(e) {
+            fileButton.addEventListener('change', function (e) {
 
                 //get file
                 var file = e.target.files[0];
@@ -70,7 +70,7 @@ var app = new Vue({
                     );
                 });
 
-                promise.then(function(downloadURL) {
+                promise.then(function (downloadURL) {
                     self.filePath = downloadURL;
                     self.readyToSubmit = true;
                 });
@@ -78,15 +78,15 @@ var app = new Vue({
 
 
         },
-        submitLecturefn: function() {
+        submitLecturefn: function () {
             const lectureForm = document.getElementById('lectureForm');
 
             if (this.readyToSubmit) {
                 firebase.firestore().collection("Courses").add({
-                        title: lectureForm.title.value,
-                        filePath: this.filePath
+                    title: lectureForm.title.value,
+                    filePath: this.filePath
 
-                    })
+                })
                     .then((docRef) => {
                         // firebase.firestore().collection("lecturesID").add({
                         //     id: docRef.id,
@@ -99,17 +99,17 @@ var app = new Vue({
             }
 
         },
-        newCoursefn: function() {
+        newCoursefn: function () {
 
             const courseForm = document.querySelector('.courseForm');
             firebase.firestore().collection("Courses").add({
-                    subject: courseForm.subject.value,
-                    class: courseForm.class.value,
-                    year: courseForm.year.value,
-                    semester: courseForm.semester.value,
-                    created: firebase.firestore.Timestamp.now()
+                subject: courseForm.subject.value,
+                class: courseForm.class.value,
+                year: courseForm.year.value,
+                semester: courseForm.semester.value,
+                created: firebase.firestore.Timestamp.now()
 
-                })
+            })
                 .then((docRef) => {
                     // firebase.firestore().collection("coursesID").add({
                     //     id: docRef.id,
@@ -119,7 +119,7 @@ var app = new Vue({
                     this.openC = false;
                 });
         },
-        openCourseModalfn: function() {
+        openCourseModalfn: function () {
             this.openC = true;
             // close course modal
             document.querySelector('.new-course').addEventListener('click', (e) => {
@@ -127,6 +127,11 @@ var app = new Vue({
                     this.openC = false
                 }
             });
+        },
+        signoutfn: function () {
+            console.log("signout is working");
+            firebase.auth().signOut()
+                .then(() => window.location.replace("../index.html"));
         }
     },
 });
