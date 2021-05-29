@@ -12,6 +12,8 @@
     integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   <link href="https://vjs.zencdn.net/7.11.4/video-js.css" rel="stylesheet" /> <!-- video player-->
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link href="css/videojs.markers.css" rel="stylesheet">
+
 
 
 
@@ -62,9 +64,14 @@
 
           <div id="mediaPlayer">
             <video id="my-video" class="video-js" controls preload="auto" width="640" height="264" data-setup="{}">
-              <source
+              <!-- <source
                 src="https://firebasestorage.googleapis.com/v0/b/reteach-a06a6.appspot.com/o/courses%2Flecture%201.mp4?alt=media&token=50245d96-a621-4650-9471-ba75c3ae5969"
+                type="video/mp4" /> -->
+
+                <source
+                src="http://vjs.zencdn.net/v/oceans.mp4"
                 type="video/mp4" />
+                
               <p class="vjs-no-js">
                 To view this video please enable JavaScript, and consider upgrading to a
                 web browser that
@@ -127,6 +134,7 @@
 
   <!-- videojs player -->
   <script src="https://vjs.zencdn.net/7.11.4/video.min.js"></script>
+  <script src='js/videojs.markers.js'></script>
 
 
 

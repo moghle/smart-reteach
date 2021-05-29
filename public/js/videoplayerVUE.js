@@ -2,7 +2,13 @@ var app = new Vue({
     el: '#playerApp',
     data: {
         courses: [],
-        lectures: []
+        lectures: [],
+        markers: [
+            { time: 9.5, text: "this" },
+            { time: 16, text: "is" },
+            { time: 23.6, text: "so" },
+            { time: 28, text: "cool" }
+        ]
     },
     mounted() {
         // this.getid();
@@ -23,10 +29,20 @@ var app = new Vue({
         currentVideo = document.getElementById("my-video");
         console.log(currentVideo);
         var video = videojs(currentVideo, {
-            autoplay: 'muted',
             playbackRates: [0.25, 0.5, 1, 1.5, 2, 2.5, 3],
-            fluid: true
+            fluid: true,
+            controls: true
         });
+        console.log(this.markers);
+        video.markers({
+            markers: this.markers
+         });
+
+        video.markers.next()
+        video.autoplay("muted");
+        this.markers.pop();
+        this.markers.pop();
+
     },
     methods: {
         getid: function () {
