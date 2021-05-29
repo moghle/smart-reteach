@@ -61,8 +61,7 @@
         <div class="container-player">
 
           <div id="mediaPlayer">
-            <video id="my-video" class="video-js" controls preload="auto" width="100%" height="100%"
-              poster="MY_VIDEO_POSTER.jpg" data-setup="{}">
+            <video id="my-video" class="video-js" controls preload="auto" width="640" height="264" data-setup="{}">
               <source
                 src="https://firebasestorage.googleapis.com/v0/b/reteach-a06a6.appspot.com/o/courses%2Flecture%201.mp4?alt=media&token=50245d96-a621-4650-9471-ba75c3ae5969"
                 type="video/mp4" />
@@ -88,21 +87,22 @@
               </udiv>
             </div>
           </div>
-          
+
       </ul>
+
       <button>Add bookmark</button>
-          <table>
-            <tr>
-              <th>Title</th>
-              <th>Date</th>
-              <th>view</th>
-            </tr>
-            <tr v-for="course in courses">
-              <td>{{course.filePath}}</td>
-              <td>{{course.year}}</td>
-              <td><button>Play</button></td>
-            </tr>
-          </table>
+      <table>
+        <tr>
+          <th>Title</th>
+          <th>Date</th>
+          <th>view</th>
+        </tr>
+        <tr v-for="course in courses">
+          <td>{{course.filePath}}</td>
+          <td>{{course.year}}</td>
+          <td><button>Play</button></td>
+        </tr>
+      </table>
     </div>
 
   </div>
@@ -113,14 +113,23 @@
   <script src="/__/firebase/7.19.1/firebase-firestore.js"></script>
   <script src="/__/firebase/7.19.1/firebase-database.js"></script>
 
+
+  <!-- initialize the SDK after all desired features are loaded -->
+  <script src="/__/firebase/init.js"></script>
+
   <script src="https://player.vimeo.com/api/player.js"></script>
 
 
   <!-- vue js -->
-  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
 
-  <!-- initialize the SDK after all desired features are loaded -->
-  <script src="/__/firebase/init.js"></script>
+
+
+  <!-- videojs player -->
+  <script src="https://vjs.zencdn.net/7.11.4/video.min.js"></script>
+
+
+
   <script src="js/signout.js"></script>
   <script src="js/videoplayerVUE.js"></script>
 
