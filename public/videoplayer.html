@@ -128,13 +128,13 @@
 
       <table class= "table">
         <tr>
-          <th>Title</th>
-          <th>Date</th>
+          <th>Hint</th>
+          <th>Time</th>
           <th>view</th>
         </tr>
-        <tr v-for="course in courses">
-          <td>{{course.filePath}}</td>
-          <td>{{course.year}}</td>
+        <tr v-for="bookmark in bookmarks">
+          <td>{{bookmark.text}}</td>
+          <td>{{bookmark.time}}</td>
           <td><button>Play</button></td>
         </tr>
       </table>
