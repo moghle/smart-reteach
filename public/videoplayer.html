@@ -13,6 +13,9 @@
   <link href="https://vjs.zencdn.net/7.11.4/video-js.css" rel="stylesheet" /> <!-- video player-->
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link href="css/videojs.markers.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
 
 
 
@@ -68,10 +71,8 @@
                 src="https://firebasestorage.googleapis.com/v0/b/reteach-a06a6.appspot.com/o/courses%2Flecture%201.mp4?alt=media&token=50245d96-a621-4650-9471-ba75c3ae5969"
                 type="video/mp4" /> -->
 
-                <source
-                src="http://vjs.zencdn.net/v/oceans.mp4"
-                type="video/mp4" />
-                
+              <source src="http://vjs.zencdn.net/v/oceans.mp4" type="video/mp4" />
+
               <p class="vjs-no-js">
                 To view this video please enable JavaScript, and consider upgrading to a
                 web browser that
@@ -81,7 +82,8 @@
           </div>
 
           <!--   ---------------------------------------------------    -->
-          <div class="playlist">
+          <div class="playlist" style="overflow-y: scroll; height:300px;display: flex;
+          flex-wrap: wrap;">
             <div class=video v-for="lecture in lectures">
               <idv id=videoInformation class="video-information"> {{lecture.videoPath}}
                 <div class="w3-light-grey w3-round">
@@ -91,14 +93,40 @@
                   duration
                 </div>
               </idv>
-              </udiv>
             </div>
           </div>
 
       </ul>
 
-      <button>Add bookmark</button>
-      <table>
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bookmarkModal">
+        Add bookmark
+      </button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="bookmarkModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Add new bookmark</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <input type="text" placeholder="Add your hint" id="hintText">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" v-on:click="addBookmarkfn">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <table class= "table">
         <tr>
           <th>Title</th>
           <th>Date</th>
@@ -130,7 +158,10 @@
   <!-- vue js -->
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
 
-
+  <!-- bootstraps -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
 
   <!-- videojs player -->
   <script src="https://vjs.zencdn.net/7.11.4/video.min.js"></script>
