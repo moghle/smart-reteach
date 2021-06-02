@@ -51,6 +51,9 @@ var app = new Vue({
                     if (doc.exists) {
                         console.log("Document data:", doc.data().mathMarkers);//todo
                         bookmarks = Object.values(doc.data().mathMarkers)
+                        bookmarks.sort(function(a,b){
+                            return a.time - b.time;
+                        });
                         self.bookmarks = bookmarks;
                         bookmarks.forEach(marker =>{
                             console.log(marker.time + " " + marker.text)

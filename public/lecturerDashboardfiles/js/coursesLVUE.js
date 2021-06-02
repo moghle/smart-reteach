@@ -19,6 +19,8 @@ var app = new Vue({
 
             this.courses = courses;
         });
+
+
     },
     methods: {
         getid: function () {
@@ -71,6 +73,8 @@ var app = new Vue({
                 });
 
                 promise.then(function (downloadURL) {
+                    playerDuration = document.getElementById("video_player");
+                    playerDuration.innerHTML = "<source src=" + downloadURL + " type='video/mp4'></source>"
                     self.filePath = downloadURL;
                     self.readyToSubmit = true;
                 });
@@ -80,12 +84,13 @@ var app = new Vue({
         },
         submitLecturefn: function () {
             const lectureForm = document.getElementById('lectureForm');
-
+            playerDuration = document.getElementById("video_player");
+            console.log(playerDuration.duration);
             if (this.readyToSubmit) {
                 firebase.firestore().collection("Courses").add({
                     title: lectureForm.title.value,
-                    filePath: this.filePath
-
+                    filePath: this.filePath,
+                    duration: playerDuration.duration
                 })
                     .then((docRef) => {
                         // firebase.firestore().collection("lecturesID").add({
