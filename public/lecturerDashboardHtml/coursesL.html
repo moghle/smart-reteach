@@ -106,11 +106,12 @@
             <button class="add-course" v-on:click="openCourseModalfn">Add new class</button>
             <div>
                 <li class="dropdown" v-for="course in courses">
-                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-book"></i><span>{{course.subject}}</span> <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="icons.html">{{course.year}}</a></li>
+                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" v-bind:id="course.id" v-on:click="displayCourse($event)"> <i class="icon-book"></i><span>{{course.subject}}</span> <b class="caret"></b></a>
+                    <!-- if u want to add more than 1 item in a subject
+                    <ul class="dropdown-menu"> 
+                        <li v-bind:id="course.id" v-on:click="editfn($event)" ><a href="icons.html">{{course.year}}</a></li>
 
-                    </ul>
+                    </ul> -->
                 </li>
             </div>
         </div>
@@ -160,9 +161,9 @@
                         <th>Date</th>
                         <th>view</th>
                     </tr>
-                    <tr v-for="course in courses">
-                        <td>{{course.filePath}}</td>
-                        <td>{{course.year}}</td>
+                    <tr v-for="lecture in lectures">
+                        <td>{{lecture.videoPath}}</td>
+                        <td>{{lecture.videoPath}}</td>
                         <td><button>Play</button></td>
                     </tr>
                 </table>

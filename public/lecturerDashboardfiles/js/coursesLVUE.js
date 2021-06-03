@@ -3,10 +3,12 @@ var app = new Vue({
     data: {
         courses: [],
         readyToSubmit: false,
-        filePath: "no-file",
+        videoPath: "no-file",
         modal: true,
         open: false,
         openC: false,
+        lectures: [],
+        currentCourseId: "no-ID"
     },
     mounted() {
         this.getid();
@@ -75,7 +77,7 @@ var app = new Vue({
                 promise.then(function (downloadURL) {
                     playerDuration = document.getElementById("video_player");
                     playerDuration.innerHTML = "<source src=" + downloadURL + " type='video/mp4'></source>"
-                    self.filePath = downloadURL;
+                    self.videoPath = downloadURL;
                     self.readyToSubmit = true;
                 });
             });
@@ -87,20 +89,47 @@ var app = new Vue({
             playerDuration = document.getElementById("video_player");
             console.log(playerDuration.duration);
             if (this.readyToSubmit) {
-                firebase.firestore().collection("Courses").add({
-                    title: lectureForm.title.value,
-                    filePath: this.filePath,
-                    duration: playerDuration.duration
-                })
-                    .then((docRef) => {
-                        // firebase.firestore().collection("lecturesID").add({
-                        //     id: docRef.id,
+                firebase.firestore().collection('Courses').doc(this.currentCourseId).get().then((doc) => {
+                    if (doc.exists) {
+                        newLecture = {
+                            title: lectureForm.title.value,
+                            videoPath: this.videoPath,
+                            duration: playerDuration.duration,
+                            created: firebase.firestore.Timestamp.now()
+                        }
+                        this.lectures.push(newLecture);
+                        console.log(this.lectures);
 
-                        // });
+                        firebase.firestore().collection('Courses').doc(this.currentCourseId).update("lectures",this.lectures)
                         lectureForm.reset();
                         lectureForm.querySelector('.error').textContent = '';
                         this.readyToSubmit = false;
-                    });
+                    } else {
+                        // doc.data() will be undefined in this case
+                        console.log("No such document!");
+                    }
+                }).catch((error) => {
+                    console.log("Error getting document:", error);
+                });
+
+
+
+
+
+                // firebase.firestore().collection("Courses").add({
+                //     title: lectureForm.title.value,
+                //     videoPath: this.videoPath,
+                //     duration: playerDuration.duration
+                // })
+                //     .then((docRef) => {
+                //         // firebase.firestore().collection("lecturesID").add({
+                //         //     id: docRef.id,
+
+                //         // });
+                //         lectureForm.reset();
+                //         lectureForm.querySelector('.error').textContent = '';
+                //         this.readyToSubmit = false;
+                //     });
             }
 
         },
@@ -137,6 +166,21 @@ var app = new Vue({
             console.log("signout is working");
             firebase.auth().signOut()
                 .then(() => window.location.replace("../index.html"));
+        },
+        displayCourse: function (event) {
+            targetId = event.currentTarget.id;
+            this.currentCourseId = targetId;
+            firebase.firestore().collection('Courses').doc(targetId).get().then((doc) => {
+                if (doc.exists) {
+                    this.lectures = Object.values(doc.data().lectures);
+                } else {
+                    // doc.data() will be undefined in this case
+                    console.log("No such document!");
+                }
+            }).catch((error) => {
+                console.log("Error getting document:", error);
+            });
+
         }
     },
 });
