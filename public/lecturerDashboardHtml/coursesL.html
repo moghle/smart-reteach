@@ -29,10 +29,11 @@
                     <a class="brand" href="index.html"> ReTeach <span class="icon-book"> </span></a>
                     <div class="nav-collapse">
                         <ul class="nav pull-right">
-                            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><b style="font-size:15px;"> S.Raja</b> <b class="caret"></b></a>
+                            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><b
+                                        style="font-size:15px;"> S.Raja</b> <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="javascript:;">Profile</a></li>
-                                    <li class="sign-out" v-on:click="signoutfn"><a href="javascript:;" >signout</a></li>
+                                    <li class="sign-out" v-on:click="signoutfn"><a href="javascript:;">signout</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -48,7 +49,8 @@
                             <a href="index.html"> <i class="icon-home"></i><span>Home</span> <b class="caret"></b></a>
                         </li>
                         <li class="dropdown">
-                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i><span>Student Info</span> <b class="caret"></b></a>
+                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i
+                                    class="icon-user"></i><span>Student Info</span> <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="viewstudentinfo.html">View Student Info</a></li>
                                 <li><a href="studentmarks.html">View Student Marks</a></li>
@@ -57,42 +59,48 @@
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-list-alt"></i><span>Attendance</span> <b class="caret"></b></a>
+                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i
+                                    class="icon-list-alt"></i><span>Attendance</span> <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="ViewAttendance.html">View Attendance</a></li>
                                 <li><a href="#">View Attendance By Date</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-list"></i><span>Exams</span> <b class="caret"></b></a>
+                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i
+                                    class="icon-list"></i><span>Exams</span> <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#">View Exams</a></li>
                                 <li><a href="#">View Exam Duty Schedule</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class=" icon-pencil"></i><span>Marks</span> <b class="caret"></b></a>
+                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i
+                                    class=" icon-pencil"></i><span>Marks</span> <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#">View Marks</a></li>
                                 <li><a href="faq.html">View/Add Multiple Subject Marks</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-th-list"></i><span>Subjects</span> <b class="caret"></b></a>
+                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i
+                                    class="icon-th-list"></i><span>Subjects</span> <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#">View Subject List</a></li>
                                 <li><a href="#">Add Subjects</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-book"></i><span>Courses</span> <b class="caret"></b></a>
+                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i
+                                    class="icon-book"></i><span>Courses</span> <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="coursesL.html">View my courses</a></li>
                                 <li><a href="icons.html">Add new course</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-envelope"></i><span>Message</span> <b class="caret"></b></a>
+                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i
+                                    class="icon-envelope"></i><span>Message</span> <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="icons.html">Icons</a></li>
 
@@ -102,11 +110,12 @@
                 </div>
                 <!-- /container -->
             </div>
-
             <button class="add-course" v-on:click="openCourseModalfn">Add new class</button>
             <div>
                 <li class="dropdown" v-for="course in courses">
-                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" v-bind:id="course.id" v-on:click="displayCourse($event)"> <i class="icon-book"></i><span>{{course.subject}}</span> <b class="caret"></b></a>
+                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" v-bind:id="course.id"
+                        v-on:click="displayCourse($event)"> <i class="icon-book"></i><span>{{course.subject}} |Grade:
+                            {{course.grade}} |Year:{{course.year}}</span> <b class="caret"></b></a>
                     <!-- if u want to add more than 1 item in a subject
                     <ul class="dropdown-menu"> 
                         <li v-bind:id="course.id" v-on:click="editfn($event)" ><a href="icons.html">{{course.year}}</a></li>
@@ -123,8 +132,8 @@
                 <h2>Add new course</h2>
                 <form class="courseForm" v-on:submit.prevent="newCoursefn">
                     <input type="text" name="subject" placeholder="Subject" required>
-                    <input type="text" name="class" placeholder="Class" required>
-                    <input type="number" name="year" min="1900" max="2200" step="1" placeholder="Year DDDD" required/>
+                    <input type="text" name="grade" placeholder="Grade" required>
+                    <input type="number" name="year" min="1900" max="2200" step="1" placeholder="Year DDDD" required />
                     <input type="text" name="semester" placeholder="Semester" required>
                     <div>
                         <button>ADD</button>
@@ -154,7 +163,10 @@
         </div>
         <div class="container">
             <div class="courses-board">
-                <button class="add-lecture" v-on:click="addLecturefn">Add new lecture</button>
+                <div class="aboveTable">
+                    <h3>{{currentCourseName}}</h3>
+                    <button class="add-lecture" v-on:click="addLecturefn">Add new lecture</button>
+                </div>
                 <table>
                     <tr>
                         <th>Title</th>
@@ -163,56 +175,14 @@
                     </tr>
                     <tr v-for="lecture in lectures">
                         <td>{{lecture.videoPath}}</td>
-                        <td>{{lecture.videoPath}}</td>
+                        <td>{{lecture.created}}</td>
                         <td><button>Play</button></td>
                     </tr>
                 </table>
             </div>
 
         </div>
-        <div class="container">
-
-            <div class="leader-board">
-
-                <div class="student-leader">
-                    <img src="../lecturerDashboardfiles/images/student.ico" height="50px" width="50px"> <label>Student Board</label>
-                </div>
-                <div class="staff-leader">
-                    <img src="../lecturerDashboardfiles/images/staff.png" height="50px" width="50px"> <label>Staff Board</label>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="newsandevents">
-                <div class="widget widget-nopad">
-                    <div class="widget-header"> <i class="icon-list-alt"></i>
-                        <h3> Recent News</h3>
-                    </div>
-                    <!-- /widget-header -->
-                    <div class="widget-content">
-                        <ul class="news-items">
-                            <li>
-                                <div class="news-item-date"> <span class="news-item-day">29</span> <span class="news-item-month">Aug</span> </div>
-                                <div class="news-item-detail"> <a href="http://www.egrappler.com/thursday-roundup-40/" class="news-item-title" target="_blank">Thursday Roundup # 40</a>
-                                    <p class="news-item-preview"> Test paragraph </p>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="news-item-date"> <span class="news-item-day">15</span> <span class="news-item-month">Jun</span> </div>
-                                <div class="news-item-detail"> <a href="http://www.egrappler.com/retina-ready-responsive-app-landing-page-website-template-app-landing/" class="news-item-title" target="_blank">Retina Ready Responsive App Landing Page Website Template – App Landing</a>
-                                    <p class="news-item-preview"> test paragraph.</p>
-                                </div>
-                            </li>
-                    </div>
-                </div>
-            </div>
-
-            <video id="video_player" width="320" height="240" controls style="display: none;">
-            </video>
-            <div id="meta"></div>
-
-        </div>
-
+       
 
 
         <script src="../lecturerDashboardfiles/js/jquery-1.7.2.min.js"></script>

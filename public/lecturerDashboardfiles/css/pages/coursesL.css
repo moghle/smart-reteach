@@ -36,3 +36,9 @@
 .new-lecture.open {
     display: block;
 }
+
+.aboveTable{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

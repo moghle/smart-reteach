@@ -8,7 +8,8 @@ var app = new Vue({
         open: false,
         openC: false,
         lectures: [],
-        currentCourseId: "no-ID"
+        currentCourseId: "no-ID",
+        currentCourseName: "Please select a class to display"
     },
     mounted() {
         this.getid();
@@ -95,7 +96,7 @@ var app = new Vue({
                             title: lectureForm.title.value,
                             videoPath: this.videoPath,
                             duration: playerDuration.duration,
-                            created: firebase.firestore.Timestamp.now()
+                            created: firebase.firestore.Timestamp.now().toDate().toDateString()
                         }
                         this.lectures.push(newLecture);
                         console.log(this.lectures);
@@ -134,14 +135,15 @@ var app = new Vue({
 
         },
         newCoursefn: function () {
-
+            lectures = []
             const courseForm = document.querySelector('.courseForm');
             firebase.firestore().collection("Courses").add({
                 subject: courseForm.subject.value,
-                class: courseForm.class.value,
+                grade: courseForm.grade.value,
                 year: courseForm.year.value,
                 semester: courseForm.semester.value,
-                created: firebase.firestore.Timestamp.now()
+                created: firebase.firestore.Timestamp.now(),
+                lectures: lectures
 
             })
                 .then((docRef) => {
@@ -173,6 +175,7 @@ var app = new Vue({
             firebase.firestore().collection('Courses').doc(targetId).get().then((doc) => {
                 if (doc.exists) {
                     this.lectures = Object.values(doc.data().lectures);
+                    this.currentCourseName = doc.data().subject;
                 } else {
                     // doc.data() will be undefined in this case
                     console.log("No such document!");
