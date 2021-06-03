@@ -31,7 +31,7 @@ var app = new Vue({
 
                 //if user authenticated render:
 
-                const ref = firebase.firestore().collection('Courses').where("subject", "==", "math");
+                const ref = firebase.firestore().collection('Courses').where("subject", "==", "Biology");
                 ref.onSnapshot(snapshot => {
                     let courses = [];
                     snapshot.forEach(doc => {
@@ -39,7 +39,7 @@ var app = new Vue({
                     });
 
                     self.courses = courses;
-                    console.log(typeof (self.courses))
+                    console.log(self.courses)
                     lecturesMap = self.courses[0].lectures
                     console.log(Object.values(lecturesMap));
                     self.lectures = Object.values(lecturesMap);

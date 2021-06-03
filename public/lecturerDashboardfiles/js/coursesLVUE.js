@@ -96,12 +96,12 @@ var app = new Vue({
                             title: lectureForm.title.value,
                             videoPath: this.videoPath,
                             duration: playerDuration.duration,
-                            created: firebase.firestore.Timestamp.now().toDate().toDateString()
+                            created: firebase.firestore.Timestamp.now().toDate()
                         }
                         this.lectures.push(newLecture);
                         console.log(this.lectures);
 
-                        firebase.firestore().collection('Courses').doc(this.currentCourseId).update("lectures",this.lectures)
+                        firebase.firestore().collection('Courses').doc(this.currentCourseId).update("lectures", this.lectures)
                         lectureForm.reset();
                         lectureForm.querySelector('.error').textContent = '';
                         this.readyToSubmit = false;
@@ -174,8 +174,21 @@ var app = new Vue({
             this.currentCourseId = targetId;
             firebase.firestore().collection('Courses').doc(targetId).get().then((doc) => {
                 if (doc.exists) {
-                    this.lectures = Object.values(doc.data().lectures);
+                    lectures = Object.values(doc.data().lectures);
+
+                    lectures.sort(function (x, y) {
+                        return x.created - y.created;
+                    })
+
+                    lectures.forEach(lecture => {
+                        date = lecture.created.toDate().toDateString();
+                        time = lecture.created.toDate().toLocaleTimeString('en-US');
+                        lecture.created = date + " " + time;
+                    })
+
+                    this.lectures = lectures;
                     this.currentCourseName = doc.data().subject;
+                    console.log(doc.data().lectures[0].created.toDate())
                 } else {
                     // doc.data() will be undefined in this case
                     console.log("No such document!");

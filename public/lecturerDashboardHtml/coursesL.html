@@ -110,18 +110,25 @@
                 </div>
                 <!-- /container -->
             </div>
-            <button class="add-course" v-on:click="openCourseModalfn">Add new class</button>
-            <div>
-                <li class="dropdown" v-for="course in courses">
-                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" v-bind:id="course.id"
-                        v-on:click="displayCourse($event)"> <i class="icon-book"></i><span>{{course.subject}} |Grade:
-                            {{course.grade}} |Year:{{course.year}}</span> <b class="caret"></b></a>
-                    <!-- if u want to add more than 1 item in a subject
+            <div class="info">
+                <div class="aboveTable">
+                    <h3>Classes:</h3>
+                    <button class="add-course" v-on:click="openCourseModalfn">Add new class</button>
+                </div>
+
+                <div>
+                    <li class="dropdown" v-for="course in courses">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" v-bind:id="course.id"
+                            v-on:click="displayCourse($event)"> <i class="icon-book"></i><span>{{course.subject}}
+                                |Grade:
+                                {{course.grade}} |Year:{{course.year}}</span> <b class="caret"></b></a>
+                        <!-- if u want to add more than 1 item in a subject
                     <ul class="dropdown-menu"> 
                         <li v-bind:id="course.id" v-on:click="editfn($event)" ><a href="icons.html">{{course.year}}</a></li>
 
                     </ul> -->
-                </li>
+                    </li>
+                </div>
             </div>
         </div>
 
@@ -171,18 +178,24 @@
                     <tr>
                         <th>Title</th>
                         <th>Date</th>
+                        <th>Duration</th>
                         <th>view</th>
                     </tr>
                     <tr v-for="lecture in lectures">
-                        <td>{{lecture.videoPath}}</td>
+                        <td>{{lecture.title}}</td>
                         <td>{{lecture.created}}</td>
+                        <td>{{lecture.duration}}</td>
                         <td><button>Play</button></td>
                     </tr>
                 </table>
             </div>
 
+            <video id="video_player" width="320" height="240" controls style="display: none;">
+            </video>
+            <div id="meta"></div>
+
         </div>
-       
+
 
 
         <script src="../lecturerDashboardfiles/js/jquery-1.7.2.min.js"></script>
