@@ -14,8 +14,16 @@
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 13px 10px rgba(0, 0, 0, 0.21);
 }
 
-.circles{
+.circles {
   padding: 5px;
+}
+
+.playlist {
+  overflow-y: scroll;
+  height: 300px;
+  width: 300px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 #mediaPlayer {
@@ -32,7 +40,7 @@
 }
 
 #playlist {
-  width: 41%;
+  width: 20%;
   height: auto;
   padding: 0 10px;
   background: white;

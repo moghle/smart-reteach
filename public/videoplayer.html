@@ -82,15 +82,15 @@
           </div>
 
           <!--   ---------------------------------------------------    -->
-          <div class="playlist" style="overflow-y: scroll; height:300px;display: flex;
-          flex-wrap: wrap;">
+          <div class="playlist">
             <div class=video v-for="lecture in lectures">
-              <idv id=videoInformation class="video-information"> {{lecture.videoPath}}
-                <div class="w3-light-grey w3-round">
-                  <div class="w3-container w3-round w3-blue" style="width:44%">44%</div>
+              <idv id=videoInformation class="video-information"> {{lecture.title}}
+                <div style="display: flex;">
+                  <progress v-bind:value="lecture.duration" max="100" id="uploader">0%</progress>
+                  <span>20%</span>
                 </div>
                 <div>
-                  duration
+                  {{lecture.duration}}
                 </div>
               </idv>
             </div>
