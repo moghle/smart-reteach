@@ -7,7 +7,8 @@ var app = new Vue({
         video: "no-video",
         bookmarks: [],
         currentlyPlaying: "http://vjs.zencdn.net/v/oceans.mp4",
-        currentBookmarks: []
+        currentBookmarks: [],
+        Progress: []
     },
     mounted() {
 
@@ -44,39 +45,58 @@ var app = new Vue({
                     lecturesMap = self.courses[0].lectures;
                     lecturesMap = Object.values(lecturesMap);
                     lecturesMap.forEach(lecture => {
-                        progressReached = 6;
+                        progressReached = 0;
                         lecture.currentProgress = Math.round((((lecture.duration - progressReached) / lecture.duration) * 100) - 100) * -1;
-                        console.log(lecture.duration)
                         if (lecture.currentProgress >= 95)
                             lecture.currentProgress = 100;
                     })
                     console.log(lecturesMap)
                     self.lectures = lecturesMap;
 
-                });
 
 
-                firebase.firestore().collection('Users').doc(user.uid).get().then((doc) => {
-                    if (doc.exists) {
-                        bookmarkInitialized = doc.data().Markers;
-                        console.log(bookmarkInitialized)
-                        if (typeof bookmarkInitialized !== 'undefined') {
+                    firebase.firestore().collection('Users').doc(user.uid).get().then((doc) => {
+                        if (doc.exists) {
+                            bookmarkInitialized = doc.data().Markers;
+                            if (typeof bookmarkInitialized !== 'undefined') {
 
-                            console.log("initialized")
-                            bookmarks = Object.values(doc.data().Markers)
-                            bookmarks.sort(function (a, b) {
-                                return a.time - b.time;
-                            });
-                            self.bookmarks = bookmarks;
+                                bookmarks = Object.values(doc.data().Markers)
+                                bookmarks.sort(function (a, b) {
+                                    return a.time - b.time;
+                                });
+                                self.bookmarks = bookmarks;
 
+                            }
+                            progressInitialized = doc.data().Progress;
+                            if (typeof progressInitialized == 'undefined') {
+
+                                firebase.firestore().collection('Users').doc(user.uid).update("Progress", [])
+                            }
+                            else {
+                                self.Progress = Object.values(doc.data().Progress)
+
+                                self.lectures.forEach(lecture => {
+                                    self.Progress.forEach(lectureProgress => {
+                                        console.log("lecture: " + lecture.lectureID + " progress " + lectureProgress.lectureID)
+                                        if (lectureProgress.lectureID == lecture.lectureID) {
+                                            lecture.currentProgress = lectureProgress.progressStatus
+                                        }
+                                    })
+                                })
+                                self.$forceUpdate();
+                            }
+                        } else {
+                            // doc.data() will be undefined in this case 
+                            console.log("No bookmarks!");
                         }
-                    } else {
-                        // doc.data() will be undefined in this case
-                        console.log("No bookmarks!");
-                    }
-                }).catch((error) => {
-                    console.log("Error getting document:", error);
+                    }).catch((error) => {
+                        console.log("Error getting document:", error);
+                    });
+
                 });
+
+
+
 
 
 
@@ -116,8 +136,6 @@ var app = new Vue({
 
             this.bookmarks.push(marker);
             // console.log(this.video.currentTime());
-            console.log(firebase.auth().currentUser.uid);
-            console.log(this.bookmarks);
             firebase.firestore().collection('Users').doc(userID).update("Markers", this.bookmarks)
 
         },
@@ -141,6 +159,32 @@ var app = new Vue({
                 }
             })
             this.currentBookmarks = currentBookmarks;
+        },
+        saveProgressfn: function () {
+            var userID = firebase.auth().currentUser.uid;
+            this.video.pause();
+            progressReached = this.video.currentTime();
+
+            this.Progress.forEach(element => {
+                if (element.lectureID == this.currentlyPlaying.lectureID) {
+                    element.progressStatus = progressReached;
+                }
+                else {
+                    newProgress = { progressStatus: progressReached, lectureID: this.currentlyPlaying.lectureID };
+                    this.Progress.push(newProgress);
+                }
+            })
+            console.log(this.Progress)
+            firebase.firestore().collection('Users').doc(userID).update("Progress", this.Progress)
+
+            this.lectures.forEach(lecture => {
+                if (lecture.lectureID == this.currentlyPlaying.lectureID) {
+                    lecture.currentProgress = Math.round((((lecture.duration - progressReached) / lecture.duration) * 100) - 100) * -1;
+                    if (lecture.currentProgress >= 95)
+                        lecture.currentProgress = 100;
+                }
+            })
+            this.$forceUpdate();
         }
     },
 });

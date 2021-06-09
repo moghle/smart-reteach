@@ -108,7 +108,8 @@ var app = new Vue({
                             videoPath: this.videoPath,
                             duration: playerDuration.duration,
                             created: firebase.firestore.Timestamp.now().toDate(),
-                            lectureID: autoId
+                            lectureID: autoId,
+                            courseID: this.currentCourseId
                         }
                         this.lectures.push(newLecture);
                         console.log(this.lectures);
