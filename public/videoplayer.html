@@ -71,7 +71,7 @@
                 src="https://firebasestorage.googleapis.com/v0/b/reteach-a06a6.appspot.com/o/courses%2Flecture%201.mp4?alt=media&token=50245d96-a621-4650-9471-ba75c3ae5969"
                 type="video/mp4" /> -->
 
-              <source src="http://vjs.zencdn.net/v/oceans.mp4" type="video/mp4" />
+              <source id="currentlyPlaying" v-bind:src="currentlyPlaying" type="video/mp4" />
 
               <p class="vjs-no-js">
                 To view this video please enable JavaScript, and consider upgrading to a
@@ -84,10 +84,10 @@
           <!--   ---------------------------------------------------    -->
           <div class="playlist">
             <div class=video v-for="lecture in lectures">
-              <idv id=videoInformation class="video-information"> {{lecture.title}}
+              <idv class="video-information" v-bind:id="lecture.lectureID"v-on:click="playFromPlaylistfn($event)"> {{lecture.title}}
                 <div style="display: flex;">
-                  <progress v-bind:value="lecture.duration" max="100" id="uploader">0%</progress>
-                  <span>20%</span>
+                  <progress v-bind:value="lecture.currentProgress" max="100">0%</progress>
+                  <span>{{lecture.currentProgress}}%</span>
                 </div>
                 <div>
                   {{lecture.duration}}

@@ -9,7 +9,8 @@ var app = new Vue({
         openC: false,
         lectures: [],
         currentCourseId: "no-ID",
-        currentCourseName: "Please select a class to display"
+        currentCourseName: "Please select a class to display",
+        lecturestemp: []
     },
     mounted() {
         this.getid();
@@ -86,6 +87,16 @@ var app = new Vue({
 
         },
         submitLecturefn: function () {
+
+            //creating unique ID for each lecture
+            const chars =
+                'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let autoId = '';
+            for (let i = 0; i < 20; i++) {
+                autoId += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+
+
             const lectureForm = document.getElementById('lectureForm');
             playerDuration = document.getElementById("video_player");
             console.log(playerDuration.duration);
@@ -96,7 +107,8 @@ var app = new Vue({
                             title: lectureForm.title.value,
                             videoPath: this.videoPath,
                             duration: playerDuration.duration,
-                            created: firebase.firestore.Timestamp.now().toDate()
+                            created: firebase.firestore.Timestamp.now().toDate(),
+                            lectureID: autoId
                         }
                         this.lectures.push(newLecture);
                         console.log(this.lectures);
@@ -179,11 +191,10 @@ var app = new Vue({
                     lectures.sort(function (x, y) {
                         return x.created - y.created;
                     })
-
                     lectures.forEach(lecture => {
                         date = lecture.created.toDate().toDateString();
                         time = lecture.created.toDate().toLocaleTimeString('en-US');
-                        lecture.created = date + " " + time;
+                        lecture.dateFormat = date + " " + time;
                     })
 
                     this.lectures = lectures;

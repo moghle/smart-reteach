@@ -6,6 +6,7 @@ var app = new Vue({
         markers: [],
         video: "no-video",
         bookmarks: [],
+        currentlyPlaying: "http://vjs.zencdn.net/v/oceans.mp4"
     },
     mounted() {
 
@@ -16,7 +17,7 @@ var app = new Vue({
             fluid: true,
             controls: true
         });
-        this.video = video;        
+        this.video = video;
         var self = this;
 
         console.log(self.markers);
@@ -39,10 +40,16 @@ var app = new Vue({
                     });
 
                     self.courses = courses;
-                    console.log(self.courses)
-                    lecturesMap = self.courses[0].lectures
-                    console.log(Object.values(lecturesMap));
-                    self.lectures = Object.values(lecturesMap);
+                    lecturesMap = self.courses[0].lectures;
+                    lecturesMap = Object.values(lecturesMap);
+                    lecturesMap.forEach(lecture => {
+                        progressReached = 6;
+                        lecture.currentProgress = Math.round(((lecture.duration - progressReached) / lecture.duration) * 100);
+                        if (lecture.currentProgress >= 95)
+                            lecture.currentProgress = 100;
+                    })
+                    console.log(lecturesMap)
+                    self.lectures = lecturesMap;
 
                 });
 
@@ -51,11 +58,11 @@ var app = new Vue({
                     if (doc.exists) {
                         console.log("Document data:", doc.data().mathMarkers);//todo
                         bookmarks = Object.values(doc.data().mathMarkers)
-                        bookmarks.sort(function(a,b){
+                        bookmarks.sort(function (a, b) {
                             return a.time - b.time;
                         });
                         self.bookmarks = bookmarks;
-                        bookmarks.forEach(marker =>{
+                        bookmarks.forEach(marker => {
                             console.log(marker.time + " " + marker.text)
                             self.video.markers.add([{ time: marker.time, text: marker.text }]);
                         })
@@ -105,8 +112,21 @@ var app = new Vue({
             // console.log(this.video.currentTime());
             console.log(firebase.auth().currentUser.uid);
             console.log(this.bookmarks);
-            firebase.firestore().collection('Users').doc(userID).update("mathMarkers",this.bookmarks)
+            firebase.firestore().collection('Users').doc(userID).update("mathMarkers", this.bookmarks)
 
+        },
+        playFromPlaylistfn: function (event) {
+            targetId = event.currentTarget.id;
+
+            console.log(targetId);
+            this.lectures.forEach(lecture =>{
+                if(lecture.lectureID == targetId){
+                    this.video.src({ type: 'video/mp4', src: lecture.videoPath});
+                    console.log(this.currentlyPlaying);
+                }
+            })
+
+            
         }
     },
 });
