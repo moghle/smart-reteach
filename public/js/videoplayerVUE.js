@@ -6,7 +6,8 @@ var app = new Vue({
         markers: [],
         video: "no-video",
         bookmarks: [],
-        currentlyPlaying: "http://vjs.zencdn.net/v/oceans.mp4"
+        currentlyPlaying: "http://vjs.zencdn.net/v/oceans.mp4",
+        currentBookmarks: []
     },
     mounted() {
 
@@ -44,7 +45,8 @@ var app = new Vue({
                     lecturesMap = Object.values(lecturesMap);
                     lecturesMap.forEach(lecture => {
                         progressReached = 6;
-                        lecture.currentProgress = Math.round(((lecture.duration - progressReached) / lecture.duration) * 100);
+                        lecture.currentProgress = Math.round((((lecture.duration - progressReached) / lecture.duration) * 100) - 100) * -1;
+                        console.log(lecture.duration)
                         if (lecture.currentProgress >= 95)
                             lecture.currentProgress = 100;
                     })
@@ -56,16 +58,18 @@ var app = new Vue({
 
                 firebase.firestore().collection('Users').doc(user.uid).get().then((doc) => {
                     if (doc.exists) {
-                        console.log("Document data:", doc.data().mathMarkers);//todo
-                        bookmarks = Object.values(doc.data().mathMarkers)
-                        bookmarks.sort(function (a, b) {
-                            return a.time - b.time;
-                        });
-                        self.bookmarks = bookmarks;
-                        bookmarks.forEach(marker => {
-                            console.log(marker.time + " " + marker.text)
-                            self.video.markers.add([{ time: marker.time, text: marker.text }]);
-                        })
+                        bookmarkInitialized = doc.data().Markers;
+                        console.log(bookmarkInitialized)
+                        if (typeof bookmarkInitialized !== 'undefined') {
+
+                            console.log("initialized")
+                            bookmarks = Object.values(doc.data().Markers)
+                            bookmarks.sort(function (a, b) {
+                                return a.time - b.time;
+                            });
+                            self.bookmarks = bookmarks;
+
+                        }
                     } else {
                         // doc.data() will be undefined in this case
                         console.log("No bookmarks!");
@@ -108,25 +112,35 @@ var app = new Vue({
 
             this.video.markers.add([marker]);
 
+            marker.lectureID = this.currentlyPlaying.lectureID
+
             this.bookmarks.push(marker);
             // console.log(this.video.currentTime());
             console.log(firebase.auth().currentUser.uid);
             console.log(this.bookmarks);
-            firebase.firestore().collection('Users').doc(userID).update("mathMarkers", this.bookmarks)
+            firebase.firestore().collection('Users').doc(userID).update("Markers", this.bookmarks)
 
         },
         playFromPlaylistfn: function (event) {
             targetId = event.currentTarget.id;
+            currentBookmarks = [];
 
-            console.log(targetId);
-            this.lectures.forEach(lecture =>{
-                if(lecture.lectureID == targetId){
-                    this.video.src({ type: 'video/mp4', src: lecture.videoPath});
-                    console.log(this.currentlyPlaying);
+            this.lectures.forEach(lecture => {
+                if (lecture.lectureID == targetId) {
+                    this.video.src({ type: 'video/mp4', src: lecture.videoPath });
+                    this.currentlyPlaying = lecture;
                 }
             })
 
-            
+            //add lecture markers:
+            this.video.markers.removeAll();
+            this.bookmarks.forEach(marker => {
+                if (marker.lectureID == this.currentlyPlaying.lectureID) {
+                    this.video.markers.add([{ time: marker.time, text: marker.text }]);
+                    currentBookmarks.push(marker);
+                }
+            })
+            this.currentBookmarks = currentBookmarks;
         }
     },
 });
