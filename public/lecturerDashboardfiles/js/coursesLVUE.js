@@ -50,8 +50,19 @@ var app = new Vue({
 
                 //get file
                 var file = e.target.files[0];
+
+                //rename file to avoid errors (path changing)
+                const chars =
+                    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                let autoId = '';
+                for (let i = 0; i < 10; i++) {
+                    autoId += chars.charAt(Math.floor(Math.random() * chars.length));
+                }
+
+                filename = file.name +autoId;
+
                 //create storage ref
-                var storageRef = firebase.storage().ref('courses/' + file.name);
+                var storageRef = firebase.storage().ref('courses/' + filename);
                 //upload file
                 var UploadTask = storageRef.put(file);
 

@@ -8,10 +8,12 @@ var app = new Vue({
         bookmarks: [],
         currentlyPlaying: "http://vjs.zencdn.net/v/oceans.mp4",
         currentBookmarks: [],
-        Progress: []
+        Progress: [],
+        currentCourse: "",
+        title:"Lectures"
     },
     mounted() {
-
+        this.currentCourse = localStorage.getItem("targetCourseID");
         currentVideo = document.getElementById("my-video");
         console.log(currentVideo);
         var video = videojs(currentVideo, {
@@ -28,11 +30,77 @@ var app = new Vue({
         video.markers({
             markers: []
         });
+
+
+        //if user authenticated then -> render:
         firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
                 console.log(user.uid);
 
-                //if user authenticated render:
+
+
+                firebase.firestore().collection('Courses').doc(self.currentCourse).get().then((doc) => {
+                    if (doc.exists) {
+                        lecturesMap = doc.data().lectures;
+                        self.title = doc.data().subject;
+                        lecturesMap = Object.values(lecturesMap);
+                        lecturesMap.forEach(lecture => {
+                            progressReached = 0;
+                            lecture.currentProgress = 0;
+                        })
+
+                        self.currentlyPlaying = lecturesMap[0];
+                        self.video.src({ type: 'video/mp4', src: lecturesMap[0].videoPath });
+
+
+                        self.lectures = lecturesMap;
+
+
+
+                        firebase.firestore().collection('Users').doc(user.uid).get().then((doc) => {
+                            if (doc.exists) {
+                                bookmarkInitialized = doc.data().Markers;
+                                if (typeof bookmarkInitialized !== 'undefined') {
+
+                                    bookmarks = Object.values(doc.data().Markers)
+                                    bookmarks.sort(function (a, b) {
+                                        return a.time - b.time;
+                                    });
+                                    self.bookmarks = bookmarks;
+
+                                }
+                                progressInitialized = doc.data().Progress;
+                                if (typeof progressInitialized == 'undefined') {
+
+                                    firebase.firestore().collection('Users').doc(user.uid).update("Progress", [])
+                                }
+                                else {
+                                    self.Progress = Object.values(doc.data().Progress)
+
+                                    self.lectures.forEach(lecture => {
+                                        self.Progress.forEach(lectureProgress => {
+                                            if (lectureProgress.lectureID == lecture.lectureID) {
+                                                lecture.currentProgress = lectureProgress.progressStatus
+                                            }
+                                        })
+                                    })
+                                    self.$forceUpdate();
+                                }
+                            } else {
+                                // doc.data() will be undefined in this case 
+                                console.log("No bookmarks!");
+                            }
+                        }).catch((error) => {
+                            console.log("Error getting document:", error);
+                        });
+
+                    } else {
+                        // doc.data() will be undefined in this case
+                        console.log("No such document!");
+                    }
+                }).catch((error) => {
+                    console.log("Error getting document:", error);
+                });
 
                 const ref = firebase.firestore().collection('Courses').where("subject", "==", "Biology");
                 ref.onSnapshot(snapshot => {
@@ -41,58 +109,7 @@ var app = new Vue({
                         courses.push({ ...doc.data(), id: doc.id });
                     });
 
-                    self.courses = courses;
-                    lecturesMap = self.courses[0].lectures;
-                    lecturesMap = Object.values(lecturesMap);
-                    lecturesMap.forEach(lecture => {
-                        progressReached = 0;
-                        lecture.currentProgress = 0;
-                    })
 
-                    self.currentlyPlaying = lecturesMap[0];
-                    self.video.src({ type: 'video/mp4', src: lecturesMap[0].videoPath });
-
-
-                    self.lectures = lecturesMap;
-
-
-
-                    firebase.firestore().collection('Users').doc(user.uid).get().then((doc) => {
-                        if (doc.exists) {
-                            bookmarkInitialized = doc.data().Markers;
-                            if (typeof bookmarkInitialized !== 'undefined') {
-
-                                bookmarks = Object.values(doc.data().Markers)
-                                bookmarks.sort(function (a, b) {
-                                    return a.time - b.time;
-                                });
-                                self.bookmarks = bookmarks;
-
-                            }
-                            progressInitialized = doc.data().Progress;
-                            if (typeof progressInitialized == 'undefined') {
-
-                                firebase.firestore().collection('Users').doc(user.uid).update("Progress", [])
-                            }
-                            else {
-                                self.Progress = Object.values(doc.data().Progress)
-
-                                self.lectures.forEach(lecture => {
-                                    self.Progress.forEach(lectureProgress => {
-                                        if (lectureProgress.lectureID == lecture.lectureID) {
-                                            lecture.currentProgress = lectureProgress.progressStatus
-                                        }
-                                    })
-                                })
-                                self.$forceUpdate();
-                            }
-                        } else {
-                            // doc.data() will be undefined in this case 
-                            console.log("No bookmarks!");
-                        }
-                    }).catch((error) => {
-                        console.log("Error getting document:", error);
-                    });
 
                 });
 

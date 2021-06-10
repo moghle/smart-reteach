@@ -53,7 +53,7 @@
 
 <body>
   <div id="playerApp">
-    <h1 class="title">Physics lectures:</h1>
+    <h1 class="title">{{title}}</h1>
     <div class="context">
     </div>
 
@@ -67,9 +67,6 @@
 
           <div id="mediaPlayer">
             <video id="my-video" class="video-js" controls preload="auto" width="640" height="264" data-setup="{}">
-              <!-- <source
-                src="https://firebasestorage.googleapis.com/v0/b/reteach-a06a6.appspot.com/o/courses%2Flecture%201.mp4?alt=media&token=50245d96-a621-4650-9471-ba75c3ae5969"
-                type="video/mp4" /> -->
 
               <source id="currentlyPlaying" v-bind:src="currentlyPlaying" type="video/mp4" />
 
