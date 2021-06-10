@@ -46,11 +46,12 @@ var app = new Vue({
                     lecturesMap = Object.values(lecturesMap);
                     lecturesMap.forEach(lecture => {
                         progressReached = 0;
-                        lecture.currentProgress = Math.round((((lecture.duration - progressReached) / lecture.duration) * 100) - 100) * -1;
-                        if (lecture.currentProgress >= 95)
-                            lecture.currentProgress = 100;
+                        lecture.currentProgress = 0;
                     })
-                    console.log(lecturesMap)
+                    if (lecturesMap.length == 0) {
+                        self.currentlyPlaying = lecturesMap[0];
+                    }
+
                     self.lectures = lecturesMap;
 
 
@@ -77,7 +78,6 @@ var app = new Vue({
 
                                 self.lectures.forEach(lecture => {
                                     self.Progress.forEach(lectureProgress => {
-                                        console.log("lecture: " + lecture.lectureID + " progress " + lectureProgress.lectureID)
                                         if (lectureProgress.lectureID == lecture.lectureID) {
                                             lecture.currentProgress = lectureProgress.progressStatus
                                         }
@@ -162,18 +162,28 @@ var app = new Vue({
         },
         saveProgressfn: function () {
             var userID = firebase.auth().currentUser.uid;
+            found = false;
             this.video.pause();
             progressReached = this.video.currentTime();
+            progressCalculation = Math.round((((this.currentlyPlaying.duration - progressReached) / this.currentlyPlaying.duration) * 100) - 100) * -1;
 
+
+            //in case length = 1 
             this.Progress.forEach(element => {
+
                 if (element.lectureID == this.currentlyPlaying.lectureID) {
-                    element.progressStatus = progressReached;
-                }
-                else {
-                    newProgress = { progressStatus: progressReached, lectureID: this.currentlyPlaying.lectureID };
-                    this.Progress.push(newProgress);
+                    element.progressStatus = progressCalculation;
+                    found = true;
                 }
             })
+            //in case no progress yet (length = 0) or new progress 
+            if (this.Progress.length == 0 || !found) {
+                newProgress = { progressStatus: progressCalculation, lectureID: this.currentlyPlaying.lectureID };
+                this.Progress.push(newProgress);
+                console.log("test")
+            }
+
+
             console.log(this.Progress)
             firebase.firestore().collection('Users').doc(userID).update("Progress", this.Progress)
 
