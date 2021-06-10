@@ -48,9 +48,10 @@ var app = new Vue({
                         progressReached = 0;
                         lecture.currentProgress = 0;
                     })
-                    if (lecturesMap.length == 0) {
-                        self.currentlyPlaying = lecturesMap[0];
-                    }
+
+                    self.currentlyPlaying = lecturesMap[0];
+                    self.video.src({ type: 'video/mp4', src: lecturesMap[0].videoPath });
+
 
                     self.lectures = lecturesMap;
 
