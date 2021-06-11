@@ -217,31 +217,3 @@ var app = new Vue({
     },
 });
 
-
-
-
-
-
-
-
-
-// //to add new lecture 
-// const ref = firebase.firestore().collection('Courses').where("subject", "==", "math");
-//         ref.onSnapshot(snapshot => {
-//             let courses = [];
-//             snapshot.forEach(doc => {
-//                 courses.push({ ...doc.data(), id: doc.id });
-//             });
-
-//             this.courses = courses;
-//             console.log(typeof (this.courses))
-//             lecturesMap = this.courses[0].lectures
-//             console.log(Object.values(lecturesMap));
-//             this.lectures = Object.values(lecturesMap);
-//             lecturesKeys = Object.keys(lecturesMap);
-//             lecturesMap[3] = {
-//                 videoPath: "lecture 3"
-//             };
-//             console.log(lecturesKeys+" "+Math.max(...lecturesKeys) +" "+ typeof(lecturesKeys));
-//             console.log(this.lectures)
-//             firebase.firestore().collection('Courses').doc("XbRMhnaMLPGHHyUsXbTS").update("lectures",lecturesMap)

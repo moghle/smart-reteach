@@ -16,216 +16,231 @@
 </head>
 
 <body>
-    <div class="navbar  navbar-fixed-top">
-        <div class="navbar-inner">
-            <div class="container">
-                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </a>
-                <a class="brand" href="index.html"> ReTeach <span class="icon-book"> </span></a>
-                <div class="nav-collapse">
-                    <ul class="nav pull-right">
-                        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><b
-                                    style="font-size:15px;"> S.Raja</b> <b class="caret"></b></a>
+    <div id=homeApp>
+        <div class="navbar  navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="index.html"> ReTeach <span class="icon-book"> </span></a>
+                    <div class="nav-collapse">
+                        <ul class="nav pull-right">
+                            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><b
+                                        style="font-size:15px;"> {{currentUser}}</b> <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="javascript:;">Profile</a></li>
+                                    <li class="sign-out" v-on:click="signoutfn"><a href="javascript:;">signout</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="subnavbar">
+            <div class="subnavbar-inner">
+                <div class="container">
+                    <ul class="mainnav">
+                        <li>
+                            <a href="index.html"> <i class="icon-home"></i><span>Home</span> <b class="caret"></b></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i
+                                    class="icon-user"></i><span>Student Info</span> <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="javascript:;">Profile</a></li>
-                                <li><a href="javascript:;">Logout</a></li>
+                                <li><a href="viewstudentinfo.html">View Student Info</a></li>
+                                <li><a href="studentmarks.html">View Student Marks</a></li>
+                                <li><a href="todaysatten.html">View Attendance</a></li>
+                                <li><a href="viewparent.html">View Parent</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i
+                                    class="icon-list-alt"></i><span>Attendance</span> <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="ViewAttendance.html">View Attendance</a></li>
+                                <li><a href="#">View Attendance By Date</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i
+                                    class="icon-list"></i><span>Exams</span> <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">View Exams</a></li>
+                                <li><a href="#">View Exam Duty Schedule</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i
+                                    class=" icon-pencil"></i><span>Marks</span> <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">View Marks</a></li>
+                                <li><a href="faq.html">View/Add Multiple Subject Marks</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i
+                                    class="icon-th-list"></i><span>Subjects</span> <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">View Subject List</a></li>
+                                <li><a href="#">Add Subjects</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i
+                                    class="icon-book"></i><span>Courses</span> <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="coursesL.html">View my courses</a></li>
+                                <li><a href="icons.html">Add new course</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i
+                                    class="icon-envelope"></i><span>Message</span> <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="icons.html">Icons</a></li>
+
                             </ul>
                         </li>
                     </ul>
                 </div>
+                <!-- /container -->
             </div>
+            <!-- /subnavbar-inner -->
         </div>
-    </div>
-    <div class="subnavbar">
-        <div class="subnavbar-inner">
-            <div class="container">
-                <ul class="mainnav">
-                    <li>
-                        <a href="index.html"> <i class="icon-home"></i><span>Home</span> <b class="caret"></b></a>
-                    </li>
-                    <li class="dropdown">
-                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i
-                                class="icon-user"></i><span>Student Info</span> <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="viewstudentinfo.html">View Student Info</a></li>
-                            <li><a href="studentmarks.html">View Student Marks</a></li>
-                            <li><a href="todaysatten.html">View Attendance</a></li>
-                            <li><a href="viewparent.html">View Parent</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i
-                                class="icon-list-alt"></i><span>Attendance</span> <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="ViewAttendance.html">View Attendance</a></li>
-                            <li><a href="#">View Attendance By Date</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i
-                                class="icon-list"></i><span>Exams</span> <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">View Exams</a></li>
-                            <li><a href="#">View Exam Duty Schedule</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i
-                                class=" icon-pencil"></i><span>Marks</span> <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">View Marks</a></li>
-                            <li><a href="faq.html">View/Add Multiple Subject Marks</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i
-                                class="icon-th-list"></i><span>Subjects</span> <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">View Subject List</a></li>
-                            <li><a href="#">Add Subjects</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i
-                                class="icon-book"></i><span>Courses</span> <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="coursesL.html">View my courses</a></li>
-                            <li><a href="icons.html">Add new course</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i
-                                class="icon-envelope"></i><span>Message</span> <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="icons.html">Icons</a></li>
+        <div class="container">
 
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <!-- /container -->
-        </div>
-        <!-- /subnavbar-inner -->
-    </div>
-    <div class="container">
-        <div class="info-board">
-            <div class="info">
-                <img src="../lecturerDashboardfiles/images/student.ico" alt="student" class="student">
-            </div>
-            <div class="info">
-                <img src="../lecturerDashboardfiles/images/teacher.png" alt="student" class="staff">
-            </div>
-            <div class="info">
+            <div class="leader-board">
 
-                <img src="../lecturerDashboardfiles/images/message.ico" alt="student" class="message">
-
-            </div>
-        </div>
-    </div>
-    <div class="container">
-
-        <div class="leader-board">
-
-            <div class="student-leader">
-                <img src="../lecturerDashboardfiles/images/student.ico" height="50px" width="50px"> <label>Student
-                    Board</label>
-            </div>
-            <div class="staff-leader">
-                <img src="../lecturerDashboardfiles/images/staff.png" height="50px" width="50px"> <label>Staff
-                    Board</label>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="newsandevents">
-            <div class="widget widget-nopad">
-                <div class="widget-header"> <i class="icon-list-alt"></i>
-                    <h3> Recent News</h3>
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bookmarkModal" style="background-color: #00ba8b;">
-                        +
-                    </button>
+                <div class="student-leader" style="overflow: auto;">
+                    <div class="notes" style="display: flex; justify-content: space-between;">
+                        <h3>Notes:</h3>
+                        <!-- Button trigger notes modal -->
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#notesModal"
+                            style="background-color: #00ba8b;">
+                            +
+                        </button>
+                    </div>
+                    <li v-for="note in notes">{{note.text}}</li>
                 </div>
-
-                <!-- /widget-header -->
-                <div class="widget-content">
-                    <ul class="news-items">
-                        <li>
-                            <div class="news-item-date"> <span class="news-item-day">29</span> <span
-                                    class="news-item-month">Aug</span> </div>
-                            <div class="news-item-detail"> <a href="http://www.egrappler.com/thursday-roundup-40/"
-                                    class="news-item-title" target="_blank">Thursday Roundup # 40</a>
-                                <p class="news-item-preview"> This is our web design and development news series where
-                                    we share our favorite design/development related articles, resources, tutorials and
-                                    awesome freebies. </p>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="news-item-date"> <span class="news-item-day">15</span> <span
-                                    class="news-item-month">Jun</span> </div>
-                            <div class="news-item-detail"> <a
-                                    href="http://www.egrappler.com/retina-ready-responsive-app-landing-page-website-template-app-landing/"
-                                    class="news-item-title" target="_blank">Retina Ready Responsive App Landing Page
-                                    Website Template – App Landing</a>
-                                <p class="news-item-preview"> App Landing is a retina ready responsive app landing page
-                                    website template perfect for software and application developers and small business
-                                    owners looking to promote their iPhone, iPad, Android Apps and software products.
-                                </p>
-                            </div>
-                        </li>
+                <div class="staff-leader">
+                    <img src="../lecturerDashboardfiles/images/staff.png" height="50px" width="50px"> <label>Staff
+                        Board</label>
                 </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="newsandevents">
+                <div class="widget widget-nopad">
+                    <div class="widget-header"> <i class="icon-list-alt"></i>
+                        <h3> Recent News</h3>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newsfeedModal"
+                            style="background-color: #00ba8b;">
+                            +
+                        </button>
+                    </div>
+
+                    <!-- /widget-header -->
+                    <div class="widget-content">
+                        <ul class="news-items">
+                            <li v-for="element in news">
+                                <div class="news-item-date"> <span class="news-item-day">{{element.day}}</span>
+                                    <span class="news-item-month">{{element.month}}</span>
+                                </div>
+                                <div class="news-item-detail"> <a class="news-item-title"
+                                        target="_blank">{{element.titleFeed}}</a>
+                                    <p class="news-item-preview"> {{element.bodyFeed}} </p>
+                                </div>
+                            </li>
+                    </div>
 
 
 
 
-                <!-- Modal -->
-                <div class="modal fade" id="bookmarkModal" tabindex="-1" role="dialog"
-                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLongTitle">Add new bookmark</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <input type="text" placeholder="Add your hint" id="hintText">
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary" v-on:click="addBookmarkfn">Save
-                                    changes</button>
+                    <!-- newsfeed Modal -->
+                    <div class="modal fade" id="newsfeedModal" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">New Event</h5>
+
+                                </div>
+                                <div class="modal-body" style="display: flex;">
+                                    <input type="text" placeholder="Title" id="titleFeed" required>
+                                    <input type="text" placeholder="Description" id="bodyFeed" required>
+                                    <input type="date" id="dateFeed" required>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" v-on:click="addEventfn">Post</button>
+                                </div>
                             </div>
                         </div>
+
+                    </div>
+
+                    <!--  notes Modal -->
+                    <div class="modal fade" id="notesModal" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">New Note</h5>
+
+                                </div>
+                                <div class="modal-body" style="display: flex;">
+                                    <input type="text" placeholder="Note" id="noteText" required>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" v-on:click="addNotefn">Post</button>
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
                 </div>
-
-
             </div>
+
+
+
+
+
+            <script src="../lecturerDashboardfiles/js/jquery-1.7.2.min.js"></script>
+            <script src="../lecturerDashboardfiles/js/excanvas.min.js"></script>
+            <!-- <script src="../lecturerDashboardfiles/js/chart.min.js" type="text/javascript"></script> -->
+            <script src="../lecturerDashboardfiles/js/bootstrap.js"></script>
+            <!-- <script language="javascript" type="text/javascript" src="../lecturerDashboardfiles/js/full-calendar/fullcalendar.min.js"></script> -->
+
+            <!-- update the version number as needed -->
+            <script src="/__/firebase/7.19.1/firebase-app.js"></script>
+            <!-- include only the Firebase features as you need -->
+            <script src="/__/firebase/7.19.1/firebase-auth.js"></script>
+            <script src="/__/firebase/7.19.1/firebase-firestore.js"></script>
+            <script src="/__/firebase/7.19.1/firebase-database.js"></script>
+
+
+            <!-- initialize the SDK after all desired features are loaded -->
+            <script src="/__/firebase/init.js"></script>
+
+
+            <!-- vue js -->
+            <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+
+            <script src="../lecturerDashboardfiles/js/homeVUE.js"></script>
+            <script src="../js/signout.js"></script>
+
+
+
+            <script src="../lecturerDashboardfiles/js/base.js"></script>
         </div>
-    </div>
-
-
-
-
-
-    <script src="../lecturerDashboardfiles/js/jquery-1.7.2.min.js"></script>
-    <script src="../lecturerDashboardfiles/js/excanvas.min.js"></script>
-    <!-- <script src="../lecturerDashboardfiles/js/chart.min.js" type="text/javascript"></script> -->
-    <script src="../lecturerDashboardfiles/js/bootstrap.js"></script>
-    <!-- <script language="javascript" type="text/javascript" src="../lecturerDashboardfiles/js/full-calendar/fullcalendar.min.js"></script> -->
-
-    <script src="../lecturerDashboardfiles/js/homeVUE.js"></script>
-    <script src="../js/signout.js"></script>
-
-
-
-    <script src="../lecturerDashboardfiles/js/base.js"></script>
- 
 </body>
 
 </html>
