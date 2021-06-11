@@ -5,7 +5,8 @@ var app = new Vue({
         user: "",
         news: [],
         notes: [],
-        calendarInstance: ""
+        calendarInstance: "",
+        staff: []
     },
     mounted() {
         firebase.firestore().settings({
@@ -13,6 +14,7 @@ var app = new Vue({
         })
         const newsfeed = firebase.firestore().collection('newsfeed');
         const notes = firebase.firestore().collection('notes');
+        const staff = firebase.firestore().collection('Users');
 
         //init calendar
         myCalendar = document.getElementById("myCalendar");
@@ -40,18 +42,21 @@ var app = new Vue({
             this.news = news;
         });
 
-        notes.onSnapshot(snapshot => {
-            let notes = [];
-            snapshot.forEach(doc => {
-                notes.push({ ...doc.data(), id: doc.id });
-            });
 
-            this.notes = notes;
+
+
+        staff.onSnapshot(snapshot => {
+            let staff = [];
+            snapshot.forEach(doc => {
+                // if(doc.data().lecturer) //add only the lecturers
+                staff.push({ ...doc.data(), id: doc.id });
+            });
+            console.log(staff)
+            this.staff = staff;
         });
 
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
-                console.log(user)
                 this.user = user;
                 this.currentUser = user.displayName;
 
@@ -61,7 +66,8 @@ var app = new Vue({
 
                 docRef.get().then((doc) => {
                     if (doc.exists) {
-                        var events = []
+
+                        //render calendar
                         firebaseEvents = doc.data().calendar;
                         firebaseEvents.forEach(event => {
                             eventFrom = event.from.toDate();
@@ -86,13 +92,16 @@ var app = new Vue({
                                 repeatEnds: event.repeatEnds,
                                 group: event.group
                             }]
-                            console.log(currentEvent)
                             this.calendarInstance.addEvents(currentEvent)
-
-
-                            events.push(event);
                         })
-                        console.log("***" + events)
+
+                        //render notes
+                        if (doc.data().notes == undefined) {//in case it is the first note
+                            firebase.firestore().collection('Users').doc(this.user.uid).update("notes", this.notes)
+                        }
+                        else {
+                            this.notes = doc.data().notes;
+                        }
                     } else {
                         // doc.data() will be undefined in this case
                         console.log("No such document!");
@@ -117,7 +126,6 @@ var app = new Vue({
                 body = document.getElementById("bodyFeed").value;
             const month = date.toLocaleString('default', { month: 'long' });
             const day = date.getDay();
-            console.log(month + " " + day);
 
             firebase.firestore().collection("newsfeed").add({
                 titleFeed: title,
@@ -136,16 +144,12 @@ var app = new Vue({
         },
         addNotefn: function () {
             noteText = document.getElementById("noteText").value;
+            note = {
+                text: noteText
+            }
+            this.notes.push(note);
+            firebase.firestore().collection('Users').doc(this.user.uid).update("notes", this.notes)
 
-
-            // firebase.firestore().collection("notes").add({
-            //     text: noteText,
-            //     user: this.user.uid
-            // }).then(() => {
-            //     alert("posted");
-            // }).catch((error) => {
-            //     console.error("Error writing document: ", error);
-            // });
         },
 
         signoutfn: function () {
@@ -154,7 +158,6 @@ var app = new Vue({
                 .then(() => window.location.replace("../index.html"));
         },
         saveCalendarfn: function () {
-            console.log("clicked")
             firebase.firestore().collection('Users').doc(this.user.uid).update("calendar", this.calendarInstance.getEvents())
 
         }

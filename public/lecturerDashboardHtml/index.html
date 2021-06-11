@@ -114,14 +114,14 @@
             <!-- /subnavbar-inner -->
         </div>
 
-        
+
         <div class="container">
             <button v-on:click="saveCalendarfn">Save Changes</button>
             <div id="myCalendar" style="max-width: 800px;"></div>
         </div>
 
         <div class="container">
-            
+
 
             <div class="leader-board">
 
@@ -136,10 +136,12 @@
                     </div>
                     <li v-for="note in notes">{{note.text}}</li>
                 </div>
-                <div class="staff-leader">
+                <div class="staff-leader" style="overflow: auto;">
                     <img src="../lecturerDashboardfiles/images/staff.png" height="50px" width="50px"> <label>Staff
                         Board</label>
+                        <li v-for="member in staff">{{member.email}}</li>
                 </div>
+              
             </div>
         </div>
         <div class="container">
@@ -153,7 +155,7 @@
                             +
                         </button>
                     </div>
-                    
+
                     <!-- /widget-header -->
                     <div class="widget-content">
                         <ul class="news-items">
