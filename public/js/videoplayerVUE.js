@@ -102,16 +102,16 @@ var app = new Vue({
                     console.log("Error getting document:", error);
                 });
 
-                const ref = firebase.firestore().collection('Courses').where("subject", "==", "Biology");
-                ref.onSnapshot(snapshot => {
-                    let courses = [];
-                    snapshot.forEach(doc => {
-                        courses.push({ ...doc.data(), id: doc.id });
-                    });
+                // const ref = firebase.firestore().collection('Courses').where("subject", "==", "Biology");
+                // ref.onSnapshot(snapshot => {
+                //     let courses = [];
+                //     snapshot.forEach(doc => {
+                //         courses.push({ ...doc.data(), id: doc.id });
+                //     });
 
 
 
-                });
+                // });
 
 
 
