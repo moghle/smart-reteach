@@ -63,8 +63,9 @@
             <img class="thumbnail-image"
               v-bind:src="course.image" />
           </a>
-          <div class="w3-light-grey w3-round">
-            <div class="w3-container w3-round w3-blue" style="width:44%">44%</div>
+          <div style="display: flex;">
+            <progress v-bind:value="course.progress" max="100">0%</progress>
+            <span>{{course.progress}}%</span>
           </div>
           <div class="video-bottom-section">
             <a href="#">

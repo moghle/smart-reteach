@@ -102,16 +102,6 @@ var app = new Vue({
                     console.log("Error getting document:", error);
                 });
 
-                // const ref = firebase.firestore().collection('Courses').where("subject", "==", "Biology");
-                // ref.onSnapshot(snapshot => {
-                //     let courses = [];
-                //     snapshot.forEach(doc => {
-                //         courses.push({ ...doc.data(), id: doc.id });
-                //     });
-
-
-
-                // });
 
 
 
@@ -196,7 +186,11 @@ var app = new Vue({
             })
             //in case no progress yet (length = 0) or new progress 
             if (this.Progress.length == 0 || !found) {
-                newProgress = { progressStatus: progressCalculation, lectureID: this.currentlyPlaying.lectureID };
+                newProgress = { 
+                    progressStatus: progressCalculation,
+                    lectureID: this.currentlyPlaying.lectureID,
+                    courseID: this.currentCourse
+                };
                 this.Progress.push(newProgress);
                 console.log("test")
             }

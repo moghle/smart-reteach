@@ -122,8 +122,8 @@ var app = new Vue({
         addEventfn: function () {
             var userID = firebase.auth().currentUser.uid;
             date = new Date(document.getElementById("dateFeed").value);
-            title =
-                body = document.getElementById("bodyFeed").value;
+            title = document.getElementById("titleFeed").value;
+            body = document.getElementById("bodyFeed").value;
             const month = date.toLocaleString('default', { month: 'long' });
             const day = date.getDay();
 
