@@ -65,8 +65,8 @@
         <!-- video player -->
         <div class="container-player">
 
-          <div id="mediaPlayer">
-            <video id="my-video" class="video-js" controls preload="auto" width="640" height="264" data-setup="{}">
+          <div id="mediaPlayer" >
+            <video id="my-video" class="video-js" controls preload="auto" width="640px" height="264" data-setup="{}">
 
               <source id="currentlyPlaying" v-bind:src="currentlyPlaying" type="video/mp4" />
 
@@ -81,15 +81,16 @@
           <!--   ---------------------------------------------------    -->
           <div class="playlist">
             <div class=video v-for="lecture in lectures">
-              <idv class="video-information" v-bind:id="lecture.lectureID"v-on:click="playFromPlaylistfn($event)"> {{lecture.title}}
+              <idv class="video-information" v-bind:id="lecture.lectureID" v-on:click="playFromPlaylistfn($event)"> {{lecture.title}}
                 <div style="display: flex;">
                   <progress v-bind:value="lecture.currentProgress" max="100">0%</progress>
                   <span>{{lecture.currentProgress}}%</span>
                 </div>
                 <div>
-                  {{lecture.duration}}
+                  {{lecture.durationFormat}}
                 </div>
               </idv>
+
             </div>
           </div>
 

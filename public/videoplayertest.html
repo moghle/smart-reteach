@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+   <title>Video.js Markers Example</title>
+
+   <style>
+      p {
+         background-color: #eee;
+         border: thin solid #777;
+         padding: 10px;
+      }
+      .video-js{
+         float:left;
+      }
+      .event-list {
+         float:left;
+         border: black;
+         margin-left: 5px;
+         width: 200px;
+
+      }
+      .control{
+         clear: both;
+      }
+   </style>
+   <link href="http://vjs.zencdn.net/5.11.8/video-js.css" rel="stylesheet">
+   <link href="css/videojs.markers.css" rel="stylesheet">
+
+</head>
+<body>
+
+  <p>This is a demo of video-markers plugin for videojs 5</p>
+
+  <div>
+     <video id="test_video" controls preload="none" class="video-js vjs-default-skin" width="640" height="264">
+         <source src="http://vjs.zencdn.net/v/oceans.mp4" type="video/mp4">
+     </video>
+     <div class='event-list'>
+        <div><b>Events: </b></div>
+     </div>
+  </div>
+
+  <div class="control">
+     <div class='next'>Next</div>
+     <div class='prev'>Prev</div>
+     <div class='remove'>Remove</div>
+     <div class='add'>Add</div>
+     <div class='updateTime'>Move all markers right by 1 sec</div>
+     <div class='reset'>Reset</div>
+     <div class='destroy'>Destroy</div>
+  </div>
+</body>
+<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+<script src="http://vjs.zencdn.net/5.11.8/video.js"></script>
+<!-- <script src='js/videojs.markers.js'></script> -->
+
+<script>
+   // initialize video.js
+   var video = videojs('test_video');
+
+   //load the marker plugin
+   video.autoplay("muted");
+   // video.markers({
+   //          markers: [
+   //              { time: 9.5, text: "this" },
+   //              { time: 16, text: "is" },
+   //              { time: 23.6, text: "so" },
+   //              { time: 28, text: "cool" }
+   //          ]
+   //      });
+      
+</script>
+</html>

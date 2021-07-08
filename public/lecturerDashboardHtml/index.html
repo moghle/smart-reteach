@@ -53,58 +53,18 @@
                             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i
                                     class="icon-user"></i><span>Student Info</span> <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="viewstudentinfo.html">View Student Info</a></li>
-                                <li><a href="studentmarks.html">View Student Marks</a></li>
-                                <li><a href="todaysatten.html">View Attendance</a></li>
-                                <li><a href="viewparent.html">View Parent</a></li>
+                                <li><a href="viewstudentinfo.html">View student info</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
                             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i
-                                    class="icon-list-alt"></i><span>Attendance</span> <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="ViewAttendance.html">View Attendance</a></li>
-                                <li><a href="#">View Attendance By Date</a></li>
-                            </ul>
+                                    class="icon-list-alt"></i><span>Analytics</span> <b class="caret"></b></a>
                         </li>
                         <li class="dropdown">
-                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i
-                                    class="icon-list"></i><span>Exams</span> <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">View Exams</a></li>
-                                <li><a href="#">View Exam Duty Schedule</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i
-                                    class=" icon-pencil"></i><span>Marks</span> <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">View Marks</a></li>
-                                <li><a href="faq.html">View/Add Multiple Subject Marks</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i
-                                    class="icon-th-list"></i><span>Subjects</span> <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">View Subject List</a></li>
-                                <li><a href="#">Add Subjects</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i
+                            <a href="coursesL.html" class="dropdown-toggle" data-toggle="dropdown"> <i
                                     class="icon-book"></i><span>Courses</span> <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="coursesL.html">View my courses</a></li>
-                                <li><a href="icons.html">Add new course</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i
-                                    class="icon-envelope"></i><span>Message</span> <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="icons.html">Icons</a></li>
-
                             </ul>
                         </li>
                     </ul>
@@ -139,9 +99,9 @@
                 <div class="staff-leader" style="overflow: auto;">
                     <img src="../lecturerDashboardfiles/images/staff.png" height="50px" width="50px"> <label>Staff
                         Board</label>
-                        <li v-for="member in staff">{{member.email}}</li>
+                    <li v-for="member in staff">{{member.email}}</li>
                 </div>
-              
+
             </div>
         </div>
         <div class="container">

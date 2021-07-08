@@ -2,7 +2,7 @@ var app = new Vue({
     el: '#coursesApp',
     data: {
         courses: [],
-        readyToSubmit: false,
+        readyToSubmit: true,
         videoPath: "no-file",
         modal: true,
         open: false,
@@ -128,7 +128,7 @@ var app = new Vue({
                         firebase.firestore().collection('Courses').doc(this.currentCourseId).update("lectures", this.lectures)
                         lectureForm.reset();
                         lectureForm.querySelector('.error').textContent = '';
-                        this.readyToSubmit = false;
+                        this.readyToSubmit = true;
                     } else {
                         // doc.data() will be undefined in this case
                         console.log("No such document!");
@@ -196,6 +196,7 @@ var app = new Vue({
         displayCourse: function (event) {
             targetId = event.currentTarget.id;
             this.currentCourseId = targetId;
+            self = this;
             firebase.firestore().collection('Courses').doc(targetId).get().then((doc) => {
                 if (doc.exists) {
                     lectures = Object.values(doc.data().lectures);
@@ -207,11 +208,11 @@ var app = new Vue({
                         date = lecture.created.toDate().toDateString();
                         time = lecture.created.toDate().toLocaleTimeString('en-US');
                         lecture.dateFormat = date + " " + time;
+                        lecture.durationformat = self.FormatDuration(lecture.duration)
                     })
 
                     this.lectures = lectures;
                     this.currentCourseName = doc.data().subject;
-                    console.log(doc.data().lectures[0].created.toDate())
                 } else {
                     // doc.data() will be undefined in this case
                     console.log("No such document!");
@@ -220,6 +221,21 @@ var app = new Vue({
                 console.log("Error getting document:", error);
             });
 
+        },
+        FormatDuration: function (time) {   
+            // Hours, minutes and seconds
+            var hrs = ~~(time / 3600);
+            var mins = ~~((time % 3600) / 60);
+            var secs = ~~time % 60;
+        
+            // Output like "1:01" or "4:03:59" or "123:03:59"
+            var ret = "";
+            if (hrs > 0) {
+                ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
+            }
+            ret += "" + mins + ":" + (secs < 10 ? "0" : "");
+            ret += "" + secs;
+            return ret;
         }
     },
 });

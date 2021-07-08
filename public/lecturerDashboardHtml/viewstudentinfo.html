@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>ReTeach</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link href="../lecturerDashboardfiles/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../lecturerDashboardfiles/css/bootstrap-responsive.min.css" rel="stylesheet">
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600" rel="stylesheet">
+  <link href="../lecturerDashboardfiles/css/font-awesome.css" rel="stylesheet">
+  <link href="../lecturerDashboardfiles/css/style.css" rel="stylesheet">
+  <link href="../lecturerDashboardfiles/css/dashboard.css" rel="stylesheet">
+  <link href="../lecturerDashboardfiles/css/pages/dashboard.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="../lecturerDashboardfiles\css\pages\calendarjs.css" />
+</head>
+
+<body>
+  <div id=studentInfoApp>
+    <div class="navbar  navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="index.html"> ReTeach <span class="icon-book"> </span></a>
+          <div class="nav-collapse">
+            <ul class="nav pull-right">
+              <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><b
+                    style="font-size:15px;"> {{currentUser}}</b> <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="javascript:;">Profile</a></li>
+                  <li class="sign-out" v-on:click="signoutfn"><a href="javascript:;">signout</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="subnavbar">
+      <div class="subnavbar-inner">
+        <div class="container">
+          <ul class="mainnav">
+            <li>
+              <a href="index.html"> <i class="icon-home"></i><span>Home</span> <b class="caret"></b></a>
+            </li>
+            <li class="dropdown">
+              <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i
+                  class="icon-user"></i><span>Student Info</span> <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="viewstudentinfo.html">View student info</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i
+                  class="icon-list-alt"></i><span>Analytics</span> <b class="caret"></b></a>
+            </li>
+            <li class="dropdown">
+              <a href="coursesL.html" class="dropdown-toggle" data-toggle="dropdown"> <i
+                  class="icon-book"></i><span>Courses</span> <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="coursesL.html">View my courses</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <!-- /container -->
+      </div>
+      <!-- /subnavbar-inner -->
+    </div>
+
+
+    <div class="main">
+
+      <div class="main-inner">
+
+        <div class="container">
+
+          <div class="row">
+
+            <div class="span12">
+
+              <div class="widget ">
+
+                <div class="widget-header">
+                  <i class="icon-user"></i>
+                  <h3>Students info</h3>
+                </div> <!-- /widget-header -->
+
+                <div class="widget-content">
+                  <div>
+                    <form action="#">
+
+                      class:<input list="hosting-plan" type="text">
+                      <datalist id="hosting-plan">
+                        <option value="7th"></option>
+                        <option value="8th"></option>
+                        <option value="9th"></option>
+                        <option value="10th"></option>
+                        <option value="11th"></option>
+                        <option value="12th"></option>
+                      </datalist>
+                      
+                      <button type="button">GO</button>
+
+                    </form>
+
+                  </div>
+
+
+                  <div class="table-responsive">
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th>Class</th>
+                          <th>Parent Name</th>
+                          <th>Parent info</th>
+
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr v-for="user in users">
+                          <td>{{user.name}}</td>
+                          <td>{{user.email}}</td>
+                          <td>{{user.class}}</td>
+                          <td>{{user.parentName}}</td>
+                          <td>{{user.ParentInfo}}</td>
+                        </tr>
+
+                      </tbody>
+                    </table>
+                    <button type="button" class="btn">Save</button>
+                  </div>
+                </div>
+              </div> <!-- /widget-content -->
+            </div> <!-- /widget -->
+          </div> <!-- /span8 -->
+        </div> <!-- /row -->
+      </div> <!-- /container -->
+    </div> <!-- /main-inner -->
+  </div>
+
+   <!-- update the version number as needed -->
+   <script src="/__/firebase/7.19.1/firebase-app.js"></script>
+   <!-- include only the Firebase features as you need -->
+   <script src="/__/firebase/7.19.1/firebase-auth.js"></script>
+   <script src="/__/firebase/7.19.1/firebase-firestore.js"></script>
+   <script src="/__/firebase/7.19.1/firebase-database.js"></script>
+
+
+   <!-- initialize the SDK after all desired features are loaded -->
+   <script src="/__/firebase/init.js"></script>
+
+
+   <!-- vue js -->
+   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+
+   <script src="../lecturerDashboardfiles/js/studentInfoVUE.js"></script>
+
+</body>
+
+
+</html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="">

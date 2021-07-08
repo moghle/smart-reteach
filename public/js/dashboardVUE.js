@@ -39,7 +39,7 @@ var app = new Vue({
                                 else {
                                     course.progress = 0;
                                 }
-                                course.progress = (progressCourse/counter)
+                                course.progress = Math.floor(progressCourse/counter)
 
                             })
                             self.$forceUpdate();
