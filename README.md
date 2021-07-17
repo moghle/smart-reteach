@@ -12,7 +12,7 @@ Part one: (firebase console)
 4. from the dashboard choose the WEB option
 5. Register your web app 
 
-Part two (create )
+Part two (create project files)
 1. From cmd install Firebase CLI -> command: nmp install -g firebase-tools
 2. Login to firebase -> command: firebase login
 3. Create firebase project -> command: firebase init
